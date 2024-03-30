@@ -1,6 +1,6 @@
 import mysql.connector
 
-def isOnline():
+async def isOnline():
     try:
         mydb = mysql.connector.connect(
             host="localhost",

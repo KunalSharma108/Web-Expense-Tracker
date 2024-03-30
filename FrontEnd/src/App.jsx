@@ -1,33 +1,49 @@
-import { useState, useEffect } from 'react'
-import axios from 'axios'
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+import Loading from './templates/loading';
+import Online from './templates/Online';
+import Offline from './templates/offline';
 
 function App() {
-  const [data, setData] = useState([{}]);
-  const [backEndonline, setBackendOnline] = useState(false)
+  const [backEndonline, setBackendOnline] = useState('loading');
 
   const fetchData = async () => {
-    try {
-      const response = await axios.get('http://localhost:5000/isOnline');
-      console.log(response.data)
-      setBackendOnline(true)
-
-    } catch (error) {
-      console.log(`There was an error : ${error}`)
+    let tries = 1;
+    while (tries < 3) {
+      try {
+        const response = await axios.get('http://localhost:5000/isOnline');
+        if (response.data === 'online') {
+          setBackendOnline(true);
+          break;
+        } else {
+          setBackendOnline('loading');
+          tries += 1;
+          if (tries >= 3) {
+            setBackendOnline(false);
+          }
+        }
+      } catch (error) {
+        console.log(`There was an error: ${error}`);
+        setBackendOnline('loading');
+        tries += 1;
+        if (tries >= 3) {
+          setBackendOnline(false);
+        }
+      }
     }
-  }
+  };
+
 
   useEffect(() => {
     fetchData();
   }, [])
 
   return (
-    <>
+    <div>
       {
-        backEndonline == false ?
-          (<h1> backend is offline , my bad lil bro </h1>) :
-          (<h1>Backend is online , enjoy lil bro </h1>)
+        backEndonline == 'loading' ? <Loading /> : backEndonline == true ? <Online /> : <Offline />
       }
-    </>
+    </div>
   )
 }
 
