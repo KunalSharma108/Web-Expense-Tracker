@@ -4,11 +4,9 @@ from flask_cors import CORS
 app = Flask(__name__)
 cors = CORS(app, origins="*")
 
-
-@app.route("/members", methods=["GET"])
-def members():
-    data = {"members": ["member 1", "member 2", "membere 3"]}
-    return jsonify(data)
+@app.route("/isOnline", methods=["GET"])
+def isOnline():
+    return "nothing"
 
 
 if __name__ == "__main__":
