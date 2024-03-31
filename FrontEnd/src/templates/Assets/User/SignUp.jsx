@@ -14,8 +14,9 @@ function SignUp() {
         padding: '10px 22px',
         fontSize: '25px'
     }
+
     return (
-        <div className='body-div my-3'>
+        <div className='body-div my-3' >
             <div className="vertical-center">
                 <div className="btn-group p-3 vertical-center" role="group" aria-label="Sign up and Sign in buttons" style={buttonStyle} >
                     <Link
@@ -30,31 +31,27 @@ function SignUp() {
                 </div>
             </div>
 
-            <div className="d-flex justify-content-center" data-bs-theme="dark">
-                <div className="border border-white p-3" style={{ maxWidth: '400px' }} data-bs-theme="dark">
-                    <div className="flex-center" data-bs-theme="dark">
-                        <div className="container">
-                            <form className='container'>
-                                <div className="mb-3">
-                                    <label htmlFor="username" className="form-label text-light">Username</label>
-                                    <input type="text" className="form-control bg-dark text-light" id="username" placeholder="Enter your username" />
-                                </div>
-                                <div className="mb-3">
-                                    <label htmlFor="email" className="form-label text-light">Email address</label>
-                                    <input type="email" className="form-control bg-dark text-light" id="email" placeholder="Enter your email" />
-                                </div>
-                                <div className="mb-3">
-                                    <label htmlFor="password" className="form-label text-light">Password</label>
-                                    <input type="password" className="form-control bg-dark text-light" id="password" placeholder="Enter your password" />
-                                </div>
-                                <button type="submit" className="btn btn-primary">Sign Up</button>
-                            </form>
+            <div className="flex-center" data-bs-theme="dark">
+                <div className="container">
+                    <form className='container'>
+                        <div className="mb-3">
+                            <label htmlFor="username" className="form-label text-light">Username</label>
+                            <input type="text" className="form-control bg-dark text-light" id="username" placeholder="Enter your username" />
                         </div>
-                    </div>
+                        <div className="mb-3">
+                            <label htmlFor="email" className="form-label text-light">Email address</label>
+                            <input type="email" className="form-control bg-dark text-light" id="email" placeholder="Enter your email" />
+                        </div>
+                        <div className="mb-3">
+                            <label htmlFor="password" className="form-label text-light">Password</label>
+                            <input type="password" className="form-control bg-dark text-light" id="password" placeholder="Enter your password" />
+                        </div>
+                        <div className="d-flex justify-content-center"> 
+                            <button type="submit" className="btn btn-primary">Sign Up</button>
+                        </div>
+                    </form>
                 </div>
             </div>
-
-
         </div>
     )
 }
