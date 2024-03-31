@@ -1,5 +1,58 @@
 body {
     background-color: #222;
-    color:white;
-    font-family:sans-serif;
+    color: white;
+    font-family: sans-serif;
+}
+
+.body-div {
+    min-height: 100vh;
+}
+
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.parent-load {
+    position: relative;
+    width: 200px;
+    height: 10px;
+    border: 1px solid white;
+    border-radius: 8px;
+}
+
+.bg-warning-loading {
+    background-color: yellow;
+    height: 100%;
+    width: 0;
+    border-radius: 8px;
+    transition: width 2s, opacity 1s;
+    opacity: 1;
+}
+
+.bg-warning-loading.loading {
+    width: 100%;
+    opacity: 0;
+}
+
+@keyframes increaseWidth {
+    0% {
+        width: 0%;
+    }
+
+    100% {
+        width: 100%;
+    }
+}
+
+.startAnimation {
+    width: 0%;
+    height: inherit;
+    animation: increaseWidth 1s ease-in-out forwards;
+}
+
+.vertical-center {
+    display: flex;
+    justify-content: center;
 }

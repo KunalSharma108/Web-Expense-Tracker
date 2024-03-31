@@ -1,6 +1,7 @@
 import React from 'react';
+import { useState } from 'react';
 
-function Online() {
+function Online(props) {
     const containerStyle = {
         display: 'flex',
         justifyContent: 'center',
@@ -10,19 +11,26 @@ function Online() {
 
     const contentStyle = {
         textAlign: 'center',
-        fontSize : '20px',
-        fontWeight : 'bolder'
+        fontSize: '20px',
+        fontWeight: 'bolder'
     };
 
     const textStyle = {
-        padding:'10px 12px'
+        padding: '10px 12px',
+        fontSize:'30px'
     }
 
     return (
         <div style={containerStyle}>
             <div style={contentStyle}>
-                <div className='text-light bg-warning'>
-                    <p style={textStyle}>Loading...</p>
+                <div className='text-light'>
+                    <p style={textStyle}> Loading... </p>
+                    <div className="parent-load">
+                        <div
+                            className={`bg-warning-loading ${props.class}`}
+                        >
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

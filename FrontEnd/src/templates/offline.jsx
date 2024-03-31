@@ -22,7 +22,7 @@ function Online() {
         <div style={containerStyle}>
             <div style={contentStyle}>
                 <div className='text-light bg-danger'>
-                    <p style={textStyle}>BackEnd is Offline, Please try again later :(</p>
+                    <p style={textStyle}>Server is Offline, Please try again later :(</p>
                 </div>
             </div>
         </div>
