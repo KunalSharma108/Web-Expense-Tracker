@@ -11,9 +11,10 @@ import {
 } from "react-router-dom";
 import Navbar from './templates/Navbar';
 import Home from './templates/Home';
-import SignUp from './templates/Assets/User/SignUp';
-import SignIn from './templates/Assets/User/SignIn';
-import User from './templates/Assets/User';
+import ExpenseWork from './templates/Assets/ExpenseWork/Expense-Work';
+import ContactUs from './templates/Assets/ContactUs/ContactUs';
+import Profile from './templates/Assets/profile/Profile';
+
 
 function App(props) {
   const [backEndonline, setBackendOnline] = useState('loading');
@@ -75,18 +76,64 @@ function App(props) {
   }, []);
 
   return (
-    <div className='body-div'>
+    <div className='body-div' >
       <Router>
         <div>
-          <Navbar />
           <Routes>
-            <Route path="/account" element={
-              backEndonline == 'loading' ? <Loading class='' /> : backEndonline == true ? <Online /> : backEndonline == 'loadingDone' ? <Loading class='startAnimation' /> : <Offline />
-            } />
-            <Route path='/' element={<Home />}></Route>
-            <Route path='/home' element={<Home />}></Route>
-            <Route path='/User/Sign-Up' element={<SignUp />}></Route>
-            <Route path='/User/Sign-In' element={<SignIn />}></Route>
+            <Route path="/" element={
+              backEndonline == 'loading' ? <Loading class='' /> : backEndonline == true ? (
+
+                <>
+                  <Navbar homeActive='active' meActive='' cuActive='' pfActive='' />
+                  <Home />
+                </>
+
+              ) : backEndonline == 'loadingDone' ? <Loading class='startAnimation' /> : <Offline />
+            }></Route>
+
+            <Route path="/Web" element={
+              backEndonline == 'loading' ? <Loading class='' /> : backEndonline == true ? (
+
+                <>
+                  <Navbar homeActive='active' meActive='' cuActive='' pfActive='' />
+                  <Home />
+                </>
+
+              ) : backEndonline == 'loadingDone' ? <Loading class='startAnimation' /> : <Offline />
+            }></Route>
+
+            <Route path="/Web/expense-work" element={
+              backEndonline == 'loading' ? <Loading class='' /> : backEndonline == true ? (
+
+                <>
+                  <Navbar homeActive='' meActive='active' cuActive='' pfActive='' />
+                  <ExpenseWork />
+                </>
+
+              ) : backEndonline == 'loadingDone' ? <Loading class='startAnimation' /> : <Offline />
+            }></Route>
+
+            <Route path="/Web/ContactUs" element={
+              backEndonline == 'loading' ? <Loading class='' /> : backEndonline == true ? (
+
+                <>
+                  <Navbar homeActive='' meActive='' cuActive='active' pfActive='' />
+                  <ContactUs />
+                </>
+
+              ) : backEndonline == 'loadingDone' ? <Loading class='startAnimation' /> : <Offline />
+            }></Route>
+
+            <Route path="/Web/Profile" element={
+              backEndonline == 'loading' ? <Loading class='' /> : backEndonline == true ? (
+
+                <>
+                  <Profile />
+                </>
+
+              ) : backEndonline == 'loadingDone' ? <Loading class='startAnimation' /> : <Offline />
+            }></Route>
+
           </Routes>
         </div>
       </Router>

@@ -1,5 +1,10 @@
+* {
+    margin:0;
+    padding:0;
+}
+
 body {
-    background-color: #222;
+    background-color: #333;
     color: white;
     font-family: sans-serif;
 }
@@ -55,4 +60,31 @@ body {
 .vertical-center {
     display: flex;
     justify-content: center;
+}
+
+.navbar {
+    box-shadow: 0px 0px 8px rgb(76, 162, 76) ;
+}
+
+.nav-link {
+    font-size:20px;
+}
+
+.nav-item {
+    margin:10px 12px;
+}
+
+.roboto-black {
+    font-family: "Roboto", sans-serif;
+    font-weight: 900;
+    font-style: normal;
+}
+
+.navbar-brand {
+    transition-duration: .2s;
+}
+
+.navbar-brand:hover {
+    transition-duration: 0.2s;
+    transform: scale(1.2,1.2);
 }

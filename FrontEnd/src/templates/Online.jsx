@@ -1,13 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import User from './Assets/User';
-import YesCookies from './Assets/yesCookies';
+import Navbar from './Navbar';
+import Home from './Home';
+import SignUp from './Assets/User/SignUp';
+import SignIn from './Assets/User/SignIn';
+import {
+    BrowserRouter as Router,
+    Routes,
+    Route,
+    Link
+} from "react-router-dom";
+
 
 function Online() {
 
     return (
-        <div>
-            {data === 'empty' ? <User /> : <YesCookies />}
-        </div>
+        null
     );
 }
 
