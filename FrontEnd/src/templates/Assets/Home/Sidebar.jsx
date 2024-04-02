@@ -1,9 +1,9 @@
 import React from 'react'
 
 export default function Sidebar() {
-  return (
-    <div>
-      
-    </div>
-  )
+    return (
+        <div className="bg-dark sidebar">
+            
+        </div>
+    )
 }
