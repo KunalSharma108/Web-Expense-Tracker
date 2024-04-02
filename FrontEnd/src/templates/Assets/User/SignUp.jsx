@@ -20,12 +20,12 @@ function SignUp() {
             <div className="vertical-center">
                 <div className="btn-group p-3 vertical-center" role="group" aria-label="Sign up and Sign in buttons" style={buttonStyle} >
                     <Link
-                        type="button" style={buttonStyle} className={`btn btn-dark border border-white bg-warning`} to={'/User/Sign-Up'}>
+                        type="button" style={buttonStyle} className={`btn btn-dark border border-white bg-warning`} to={'/User/SignUp'}>
                         Sign Up
                     </Link>
 
                     <Link
-                        type="button" style={buttonStyle} className={`btn btn-dark border border-white `} to={'/User/Sign-In'}>
+                        type="button" style={buttonStyle} className={`btn btn-dark border border-white `} to={'/User/SignIn'}>
                         Sign In
                     </Link>
                 </div>

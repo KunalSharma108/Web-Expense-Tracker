@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Loading from './templates/loading';
-import Online from './templates/Online';
 import Offline from './templates/offline';
 import {
   BrowserRouter as Router,
@@ -10,10 +9,15 @@ import {
   Link
 } from "react-router-dom";
 import Navbar from './templates/Navbar';
-import Home from './templates/Home';
+import Home from './templates/Assets/Home/Home';
 import ExpenseWork from './templates/Assets/ExpenseWork/Expense-Work';
 import ContactUs from './templates/Assets/ContactUs/ContactUs';
 import Profile from './templates/Assets/profile/Profile';
+import Footer from './templates/Assets/footer/footer';
+import SignUp from './templates/Assets/User/SignUp';
+import SignIn from './templates/Assets/User/SignIn';
+
+
 
 
 function App(props) {
@@ -84,8 +88,9 @@ function App(props) {
               backEndonline == 'loading' ? <Loading class='' /> : backEndonline == true ? (
 
                 <>
-                  <Navbar homeActive='active' meActive='' cuActive='' pfActive='' />
+                  <Navbar homeActive='active' meActive='' cuActive='' pfActive='' disabled={data == 'empty' ? "disabled" : ""}/>
                   <Home />
+                  <Footer />                  
                 </>
 
               ) : backEndonline == 'loadingDone' ? <Loading class='startAnimation' /> : <Offline />
@@ -95,8 +100,9 @@ function App(props) {
               backEndonline == 'loading' ? <Loading class='' /> : backEndonline == true ? (
 
                 <>
-                  <Navbar homeActive='active' meActive='' cuActive='' pfActive='' />
+                  <Navbar homeActive='active' meActive='' cuActive='' pfActive='' disabled={data == 'empty' ? "disabled" : ""}/>
                   <Home />
+                  <Footer />                  
                 </>
 
               ) : backEndonline == 'loadingDone' ? <Loading class='startAnimation' /> : <Offline />
@@ -106,8 +112,9 @@ function App(props) {
               backEndonline == 'loading' ? <Loading class='' /> : backEndonline == true ? (
 
                 <>
-                  <Navbar homeActive='' meActive='active' cuActive='' pfActive='' />
+                  <Navbar homeActive='' meActive='active' cuActive='' pfActive='' disabled={data == 'empty' ? "disabled" : ""}/>
                   <ExpenseWork />
+                  <Footer />                  
                 </>
 
               ) : backEndonline == 'loadingDone' ? <Loading class='startAnimation' /> : <Offline />
@@ -117,8 +124,9 @@ function App(props) {
               backEndonline == 'loading' ? <Loading class='' /> : backEndonline == true ? (
 
                 <>
-                  <Navbar homeActive='' meActive='' cuActive='active' pfActive='' />
+                  <Navbar homeActive='' meActive='' cuActive='active' pfActive='' disabled={data == 'empty' ? "disabled" : ""}/>
                   <ContactUs />
+                  <Footer />                  
                 </>
 
               ) : backEndonline == 'loadingDone' ? <Loading class='startAnimation' /> : <Offline />
@@ -129,10 +137,15 @@ function App(props) {
 
                 <>
                   <Profile />
+                  <Footer />                  
                 </>
 
               ) : backEndonline == 'loadingDone' ? <Loading class='startAnimation' /> : <Offline />
             }></Route>
+
+            <Route path='/user/SignUp' element={<SignUp />}></Route>
+            <Route path='/user/SignIn' element={<SignIn />}></Route>
+
 
           </Routes>
         </div>

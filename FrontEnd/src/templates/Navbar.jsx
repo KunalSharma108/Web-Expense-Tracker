@@ -2,6 +2,20 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 function Navbar(props) {
+    const signUpbutton = (
+        <Link className="right-container" to={'/user/SignUp'}>
+            <i className="fa-solid fa-user-plus"></i>
+            <div className="content">Sign Up</div>
+        </Link>
+    )
+
+    const logOutbutton = (
+        <Link className="right-container" to={'/user/SignUp'}>
+            <div className="pfp"></div>
+            <div className="content">Log Out</div>
+        </Link>
+    )
+    
     return (
         <nav className="navbar navbar-expand-lg bg-success border-body" data-bs-theme="dark">
             <div className="container-fluid">
@@ -17,13 +31,13 @@ function Navbar(props) {
                             <Link className={`nav-link roboto-black ${props.homeActive} `} aria-current="page" to={'/Web'}>Home</Link>
                         </li>
                         <li className="nav-item">
-                            <Link className={`nav-link roboto-black ${props.meActive} `} to={'/Web/expense-work'}>Manage Expenses</Link>
+                            <Link className={`nav-link roboto-black ${props.meActive} ${props.disabled} `} to={'/Web/expense-work'}>Manage Expenses</Link>
                         </li>
                         <li className="nav-item">
-                            <Link className={`nav-link roboto-black ${props.cuActive} `} to={'/Web/ContactUs'}>Contact Us</Link>
+                            <Link className={`nav-link roboto-black ${props.cuActive} ${props.disabled} `} to={'/Web/ContactUs'}>Contact Us</Link>
                         </li>
                         <li className="nav-item">
-                            <Link className={`nav-link roboto-black ${props.pfActive} `} to={'/Web/Profile'}>My Profile</Link>
+                            <Link className={`nav-link roboto-black ${props.pfActive} ${props.disabled} `} to={'/Web/Profile'}>My Profile</Link>
                         </li>
                     </ul>
                 </div>
