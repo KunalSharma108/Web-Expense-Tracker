@@ -1,14 +1,17 @@
 import React from 'react'
 import Sidebar from './Sidebar'
+import MainContent from './mainContent'
 
 function Home() {
   return (
-    <div className="home-content">
-      <div className="sidebar">
-        <Sidebar />
-      </div>
-      <div className="main-content">
-        <h1>this is the main content of the home page</h1>
+    <div className="container-fluid">
+      <div className="row">
+        <div className="col-md-3">
+          <Sidebar />
+        </div>
+        <div className="col-md-9">
+          <MainContent />
+        </div>
       </div>
     </div>
   )
