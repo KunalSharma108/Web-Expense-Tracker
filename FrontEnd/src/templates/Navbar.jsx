@@ -19,7 +19,7 @@ function Navbar(props) {
     return (
         <nav className="navbar navbar-expand-lg bg-success border-body" data-bs-theme="dark">
             <div className="container-fluid">
-                <Link className="navbar-brand" to={'/Web'} >
+                <Link className="navbar-brand" to={'/'} >
                     <img src="\src\templates\Assets\images\dollor-icon.png" alt="" width={'60px'} height={'60px'} />
                 </Link>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -28,16 +28,16 @@ function Navbar(props) {
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav ">
                         <li className="nav-item">
-                            <Link className={`nav-link roboto-black ${props.homeActive} `} aria-current="page" to={'/Web'}>Home</Link>
+                            <Link className={`nav-link roboto-black ${props.learnActive} `} aria-current="page" to={'/User-Guide'}>User Guide</Link>
                         </li>
                         <li className="nav-item">
-                            <Link className={`nav-link roboto-black ${props.meActive} ${props.disabled} `} to={'/Web/expense-work'}>Manage Expenses</Link>
+                            <Link className={`nav-link roboto-black ${props.pfActive} ${props.disabled} `} to={'/Profile'}>My Profile</Link>
                         </li>
                         <li className="nav-item">
-                            <Link className={`nav-link roboto-black ${props.cuActive} ${props.disabled} `} to={'/Web/ContactUs'}>Contact Us</Link>
+                            <Link className={`nav-link roboto-black ${props.meActive} ${props.disabled} `} to={'/expense-work'}>Manage Expenses</Link>
                         </li>
                         <li className="nav-item">
-                            <Link className={`nav-link roboto-black ${props.pfActive} ${props.disabled} `} to={'/Web/Profile'}>My Profile</Link>
+                            <Link className={`nav-link roboto-black ${props.cuActive} ${props.disabled} `} to={'/ContactUs'}>Contact Us</Link>
                         </li>
                     </ul>
                 </div>

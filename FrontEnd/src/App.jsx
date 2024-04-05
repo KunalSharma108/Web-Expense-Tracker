@@ -9,16 +9,14 @@ import {
   Link
 } from "react-router-dom";
 import Navbar from './templates/Navbar';
-import Home from './templates/Assets/Home/Home';
+import Learn from './templates/Assets/Learn/Learn';
 import ExpenseWork from './templates/Assets/ExpenseWork/Expense-Work';
 import ContactUs from './templates/Assets/ContactUs/ContactUs';
 import Profile from './templates/Assets/profile/Profile';
 import Footer from './templates/Assets/footer/footer';
 import SignUp from './templates/Assets/User/SignUp';
 import SignIn from './templates/Assets/User/SignIn';
-
-
-
+import Home from './templates/Assets/Home/Home';
 
 function App(props) {
   const [backEndonline, setBackendOnline] = useState('loading');
@@ -88,56 +86,56 @@ function App(props) {
               backEndonline == 'loading' ? <Loading class='' /> : backEndonline == true ? (
 
                 <>
-                  <Navbar homeActive='active' meActive='' cuActive='' pfActive='' disabled={data == 'empty' ? "disabled" : ""}/>
-                  <Home />
-                  <Footer />                  
+                  <Navbar learnActive='' meActive='' cuActive='' pfActive='' disabled={data == 'empty' ? "disabled" : ""} />
+                  <Home cookie={data == 'empty' ? false : true} />
+                  <Footer />
                 </>
 
               ) : backEndonline == 'loadingDone' ? <Loading class='startAnimation' /> : <Offline />
             }></Route>
 
-            <Route path="/Web" element={
+            <Route path="/expense-work" element={
               backEndonline == 'loading' ? <Loading class='' /> : backEndonline == true ? (
 
                 <>
-                  <Navbar homeActive='active' meActive='' cuActive='' pfActive='' disabled={data == 'empty' ? "disabled" : ""}/>
-                  <Home />
-                  <Footer />                  
-                </>
-
-              ) : backEndonline == 'loadingDone' ? <Loading class='startAnimation' /> : <Offline />
-            }></Route>
-
-            <Route path="/Web/expense-work" element={
-              backEndonline == 'loading' ? <Loading class='' /> : backEndonline == true ? (
-
-                <>
-                  <Navbar homeActive='' meActive='active' cuActive='' pfActive='' disabled={data == 'empty' ? "disabled" : ""}/>
+                  <Navbar learnActive='' meActive='active' cuActive='' pfActive='' disabled={data == 'empty' ? "disabled" : ""} />
                   <ExpenseWork />
-                  <Footer />                  
+                  <Footer />
                 </>
 
               ) : backEndonline == 'loadingDone' ? <Loading class='startAnimation' /> : <Offline />
             }></Route>
 
-            <Route path="/Web/ContactUs" element={
+            <Route path="/ContactUs" element={
               backEndonline == 'loading' ? <Loading class='' /> : backEndonline == true ? (
 
                 <>
-                  <Navbar homeActive='' meActive='' cuActive='active' pfActive='' disabled={data == 'empty' ? "disabled" : ""}/>
+                  <Navbar learnActive='' meActive='' cuActive='active' pfActive='' disabled={data == 'empty' ? "disabled" : ""} />
                   <ContactUs />
-                  <Footer />                  
+                  <Footer />
                 </>
 
               ) : backEndonline == 'loadingDone' ? <Loading class='startAnimation' /> : <Offline />
             }></Route>
 
-            <Route path="/Web/Profile" element={
+            <Route path="/Profile" element={
               backEndonline == 'loading' ? <Loading class='' /> : backEndonline == true ? (
 
                 <>
                   <Profile />
-                  <Footer />                  
+                  <Footer />
+                </>
+
+              ) : backEndonline == 'loadingDone' ? <Loading class='startAnimation' /> : <Offline />
+            }></Route>
+
+            <Route path="/User-Guide" element={
+              backEndonline == 'loading' ? <Loading class='' /> : backEndonline == true ? (
+
+                <>
+                  <Navbar learnActive='active' meActive='' cuActive='' pfActive='' disabled={data == 'empty' ? "disabled" : ""} />
+                  <Learn />
+                  <Footer />
                 </>
 
               ) : backEndonline == 'loadingDone' ? <Loading class='startAnimation' /> : <Offline />

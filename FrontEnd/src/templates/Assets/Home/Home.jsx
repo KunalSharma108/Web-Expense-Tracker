@@ -1,20 +1,18 @@
 import React from 'react'
-import Sidebar from './Sidebar'
-import MainContent from './mainContent'
+import PropTypes from 'prop-types'
+import HomePicturetop from './homePicturetop'
 
-function Home() {
+function Home(props) {
   return (
-    <div className="container-fluid">
-      <div className="row">
-        <div className="col-md-3">
-          <Sidebar />
-        </div>
-        <div className="col-md-9">
-          <MainContent />
-        </div>
-      </div>
+    <div className='home-main'>
+      <HomePicturetop cookie = {props.cookie}/>
     </div>
   )
 }
 
+Home.propTypes = {
+
+}
+
 export default Home
+
