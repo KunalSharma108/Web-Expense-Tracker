@@ -6,6 +6,11 @@ import {
     Link
 } from "react-router-dom";
 
+import { useState } from 'react';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../Auth/firebase';
+
+
 function SignUp() {
 
     const buttonStyle = {
@@ -15,6 +20,19 @@ function SignUp() {
         fontSize: '25px'
     }
 
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+    const handleSignUp = (e) => {
+        e.preventDefault();
+
+        try { 
+            createUserWithEmailAndPassword(auth, email, password)
+            .then((usercredentials) => console.log(usercredentials))
+        } catch (error) {
+            console.log(error)
+        }
+    }
     return (
         <div className='body-div my-3' >
             <div className="vertical-center">
@@ -35,19 +53,16 @@ function SignUp() {
                 <div className="container">
                     <form className='container'>
                         <div className="mb-3">
-                            <label htmlFor="username" className="form-label text-light">Username</label>
-                            <input type="text" className="form-control bg-dark text-light" id="username" placeholder="Enter your username" />
-                        </div>
-                        <div className="mb-3">
                             <label htmlFor="email" className="form-label text-light">Email address</label>
-                            <input type="email" className="form-control bg-dark text-light" id="email" placeholder="Enter your email" />
+                            <input type="email" className="form-control bg-dark text-light" id="email" placeholder="Enter your email"  value={email} onChange={(e) => setEmail(e.target.value)} />
                         </div>
                         <div className="mb-3">
                             <label htmlFor="password" className="form-label text-light">Password</label>
-                            <input type="password" className="form-control bg-dark text-light" id="password" placeholder="Enter your password" />
+                            <input type="password" className="form-control bg-dark text-light" id="password" placeholder="Enter your password" value={password} onChange={(e) => setPassword(e.target.value)}/>
                         </div>
+
                         <div className="d-flex justify-content-center"> 
-                            <button type="submit" className="btn btn-primary">Sign Up</button>
+                            <button type="submit" className="btn btn-primary" onClick={handleSignUp}>Sign Up</button>
                         </div>
                     </form>
                 </div>
