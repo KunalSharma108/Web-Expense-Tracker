@@ -8,8 +8,8 @@ function Home(props) {
   return (
     <div className='home-main'>
       <HomePicturetop cookie = {props.cookie}/>
-      <About />
       <WhyWET />
+      <About />
     </div>
   )
 }
