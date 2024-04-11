@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Titillium+Web:wght@600&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,466;1,466&display=swap');
 
 :root {
     --border: rgba(70, 70, 70, 0.724);
@@ -305,6 +306,7 @@ body {
     align-items: center;
     margin-top: 30px;
     border-bottom: 5px solid var(--border);
+    padding:50px 0;
 }
 
 .why-box>div {
@@ -352,4 +354,76 @@ body {
 
 .why-content:first-child {
     border-top:5px solid var(--border);
+}
+
+.keyf-main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding:50px 0;
+}
+
+.keyf-content {
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: auto auto;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+}
+
+.keyf-head {
+    display: flex;
+    justify-content: center;
+    align-items: center;    
+    margin:10px 0 30px 0;
+    font-size:40px;
+    font-family: "Titillium Web", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+    text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.461);
+}
+
+.keyf-box-content {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-top:40px;
+}
+
+.keyf-boxes {
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: auto;
+    border:2px solid #333;
+    background: #111;
+    margin:0 20px;
+    padding:30px;
+    border-radius:10px;
+    box-shadow: 0px 0px 17px #111;
+}
+
+.keyf-box-head {
+    text-align: left;
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 466;
+    font-style: normal;
+    font-size:25px;
+    margin-bottom:20px;
+    letter-spacing: 2px;
+    word-spacing: 3px;
+    text-shadow:0px 0px 10px rgba(255, 255, 255, 0.858);
+}
+
+.keyf-box-pcontent {
+    font-size:18px;
+    color: rgba(243, 243, 243, 0.636);
+    font-family: "Quicksand", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 300;
+    font-style: normal;
+    word-spacing: 3px;
+    letter-spacing: 2px;
+    text-shadow: 0px 0px 10px rgba(243, 243, 243, 0.636);
 }
