@@ -66,7 +66,7 @@ function App(props) {
         cookieObject[key.trim()] = value.trim();
       });
 
-      if (cookieObject['username'] && cookieObject['email'] && cookieObject['password']) {
+      if (cookieObject['username'] && cookieObject['email'] && cookieObject['password'] && cookieObject['login']) {
         setData(cookieObject);
       }
       else {
@@ -87,7 +87,7 @@ function App(props) {
 
                 <>
                   <Navbar learnActive='' meActive='' cuActive='' pfActive='' disabled={data == 'empty' ? "disabled" : ""} />
-                  <Home cookie={data == 'empty' ? false : true} />
+                  <Home cookie={data == 'empty' ? false : data} />
                   <Footer />
                 </>
 
