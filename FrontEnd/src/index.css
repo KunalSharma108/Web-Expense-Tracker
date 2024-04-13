@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Titillium+Web:wght@600&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,466;1,466&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital@1&display=swap');
 
 :root {
     --border: rgba(70, 70, 70, 0.724);
@@ -395,6 +396,7 @@ body {
     margin: 0 20px;
     padding: 30px;
     border-radius: 10px;
+    transition-duration: 0.4s;
     box-shadow: 0px 0px 20px #000;
     margin-bottom: 30px;
 }
@@ -426,7 +428,7 @@ body {
 
 .gs-main {
     padding: 30px 60px;
-    background-image: linear-gradient(to bottom, rgba(34, 34, 34, 0.33), #22222248), url(templates\Assets\images\typewriter.jpg);
+    background-image: linear-gradient(to bottom, rgba(34, 34, 34, 0.559), #22222261), url(templates\Assets\images\typewriter.jpg);
     background-size: cover;
     background-repeat: no-repeat;
     border-top:5px solid var(--border);
@@ -443,5 +445,16 @@ body {
 }
 
 .gs-p-content {
-    font-size:20px;
+    font-size:18px;
+    font-family: "Lora", serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: italic;  
+    letter-spacing: 1px;
+    margin-bottom:30px;
+}
+
+.gs-p-content i {
+    font-size:27px;
+    font-weight: bolder;
 }

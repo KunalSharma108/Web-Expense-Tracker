@@ -9,7 +9,7 @@ import GetStarted from './GetStarted'
 function Home(props) {
   return (
     <div className='home-main'>
-      <HomePicturetop />
+      <HomePicturetop cookie = {props.cookie}/>
       <WhyWET />
       <KeyFeatures />
       <GetStarted cookie = {props.cookie} />

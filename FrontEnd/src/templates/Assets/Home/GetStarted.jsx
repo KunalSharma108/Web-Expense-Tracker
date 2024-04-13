@@ -11,7 +11,7 @@ function GetStarted(props) {
 
     const SignUpContent = (
         <>
-            Start Using our services right now and <Link className="btn btn-success disabled" to={'/expense-work'}>Manage Expenses</Link> <i>Oops!</i> Looks like you are not signed Up, <div className="btn btn-primary">Sign Up</div> right now.
+            Start Using our services right now and <Link className="btn btn-success disabled" to={'/expense-work'}>Manage Expenses</Link> <i>Oops!</i> Looks like you are not signed Up, <Link className="btn btn-primary" to={'/user/SignUp'}>Sign Up</Link> right now.
         </>
     )
     return (
