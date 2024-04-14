@@ -107,8 +107,8 @@ body {
 }
 
 .footer {
+    background-color: #111;
     margin-top: 50px;
-    box-shadow: 0px 0px 8px rgb(76, 162, 76);
 }
 
 .nav-link:hover {
@@ -457,4 +457,85 @@ body {
 .gs-p-content i {
     font-size:27px;
     font-weight: bolder;
+}
+
+.tu-main {
+    border-bottom:5px solid var(--border);
+}
+
+.tu-subhead.keyf-box-head {
+    text-align: center;
+}
+
+.logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.tu-head.keyf-head {
+    font-size:50px;
+}
+
+.tu-logo {
+    margin-bottom:20px;
+}
+
+.tu-logo img {
+    width: inherit;
+    height: inherit;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+
+@keyframes reactGlow {
+    0% {
+        filter: drop-shadow(0 0 0.5em #61dafbc3);
+    }
+    50% {
+        filter: drop-shadow(0 0 3em #61dafbc3);
+    }
+    100% {
+        filter: drop-shadow(0 0 0.5em #61dafbc3);
+    }
+}
+
+@keyframes firebaseGlow {
+    0% {
+        filter: drop-shadow(0 0 0.5em #e3b425);
+    }
+    50% {
+        filter: drop-shadow(0 0 3em #e3b425);
+    }
+    100% {
+        filter: drop-shadow(0 0 0.5em #e3b425);
+    }
+}
+
+.react {
+    margin:30px 0;
+    width: 140px;
+    height: 130px;
+    animation: spin 10s linear infinite;
+}
+
+.react img {
+    animation: reactGlow 5s infinite;
+}
+
+.firebase {
+    width: 140px;
+    height: 140px;
+}
+
+.firebase img {
+    animation: firebaseGlow 5s infinite;
 }

@@ -14,6 +14,7 @@ function GetStarted(props) {
             Start Using our services right now and <Link className="btn btn-success disabled" to={'/expense-work'}>Manage Expenses</Link> <i>Oops!</i> Looks like you are not signed Up, <Link className="btn btn-primary" to={'/user/SignUp'}>Sign Up</Link> right now.
         </>
     )
+
     return (
         <div className="gs-main">
             <div className="gs-content">

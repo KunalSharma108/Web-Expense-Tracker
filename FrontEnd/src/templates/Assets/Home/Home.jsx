@@ -5,6 +5,7 @@ import About from './About'
 import WhyWET from './WhyWET'
 import KeyFeatures from './KeyFeatures'
 import GetStarted from './GetStarted'
+import TechUsed from './TechUsed'
 
 function Home(props) {
   return (
@@ -13,6 +14,7 @@ function Home(props) {
       <WhyWET />
       <KeyFeatures />
       <GetStarted cookie = {props.cookie} />
+      <TechUsed />
       <About />
     </div>
   )
