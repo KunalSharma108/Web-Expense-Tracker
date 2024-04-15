@@ -2,7 +2,7 @@ import React from 'react'
 
 function KeyFeatures() {
     return (
-        <div className="keyf-main">
+        <div className="keyf-main" id='keyf'>
             <div className="keyf-content">
                 <div className="keyf-head">
                     Features for Effective Expense Management
@@ -10,7 +10,7 @@ function KeyFeatures() {
                 <div className="keyf-box-content">
                     <div className="keyf-boxes">
                         <div className="keyf-box-head">
-                            Recording Expenses
+                            Recording
                         </div>
                         <div className="keyf-box-pcontent">
                             Easily input and track your expenses with customizable fields for item name, price, quantity, and category. Our intuitive interface makes recording expenses a breeze.

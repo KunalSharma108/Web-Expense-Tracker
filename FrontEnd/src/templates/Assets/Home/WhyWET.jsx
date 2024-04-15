@@ -2,7 +2,7 @@ import React from 'react'
 
 function WhyWET() {
     return (
-        <div className="why-main">
+        <div className="why-main" id='why'>
             <div className="why-content">
                 <div className="why-box">
                     <div className="why-pic">

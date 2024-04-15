@@ -9,7 +9,7 @@ import TechUsed from './TechUsed'
 
 function Home(props) {
   return (
-    <div className='home-main'>
+    <div className='home-main'  id='home'>
       <HomePicturetop cookie = {props.cookie}/>
       <WhyWET />
       <KeyFeatures />

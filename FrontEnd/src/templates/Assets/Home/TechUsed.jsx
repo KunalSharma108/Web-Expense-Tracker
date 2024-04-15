@@ -7,7 +7,7 @@ function TechUsed(props) {
     return (
         <div className="tu-main keyf-main">
             <div className="tu-content keyf-content">
-                <div className="tu-head keyf-head">
+                <div className="tu-head keyf-head" id='techUsed'>
                     Tech Used
                 </div>
                 <div className="tu-box-content keyf-box-content">

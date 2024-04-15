@@ -88,7 +88,13 @@ function App(props) {
                 <>
                   <Navbar learnActive='' meActive='' cuActive='' pfActive='' disabled={data == 'empty' ? "disabled" : ""} />
                   <Home cookie={data == 'empty' ? false : data} />
-                  <Footer />
+                  <Footer
+                    Link0='why' linkName0='Why Web-Expense-Tracker'
+                    Link1='keyf' linkName1='Key Features'
+                    Link2='techUsed' linkName2='Tech Used'
+                    Link3='techUsed' linkName3='React ?'
+                    Link4='techUsed' linkName4='Firebase ?'
+                     />
                 </>
 
               ) : backEndonline == 'loadingDone' ? <Loading class='startAnimation' /> : <Offline />
