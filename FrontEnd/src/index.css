@@ -2,6 +2,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,466;1,466&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Lora:ital@1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Reddit+Mono:wght@250&display=swap');
 
 :root {
     --border: rgba(70, 70, 70, 0.724);
@@ -430,36 +432,36 @@ body {
     background-image: linear-gradient(to bottom, rgba(34, 34, 34, 0.559), #22222261), url(templates\Assets\images\typewriter.jpg);
     background-size: cover;
     background-repeat: no-repeat;
-    border-top:5px solid var(--border);
-    border-bottom:5px solid var(--border);
+    border-top: 5px solid var(--border);
+    border-bottom: 5px solid var(--border);
     box-shadow: 0px 0px 20px #000000a0;
 }
 
 .gs-head {
-    font-size:70px;
-    color:rgb(76, 162, 76);
+    font-size: 70px;
+    color: rgb(76, 162, 76);
     font-family: "Titillium Web", sans-serif;
     font-weight: 800;
     font-style: normal;
 }
 
 .gs-p-content {
-    font-size:18px;
+    font-size: 18px;
     font-family: "Lora", serif;
     font-optical-sizing: auto;
     font-weight: 400;
-    font-style: italic;  
+    font-style: italic;
     letter-spacing: 1px;
-    margin-bottom:30px;
+    margin-bottom: 30px;
 }
 
 .gs-p-content i {
-    font-size:27px;
+    font-size: 27px;
     font-weight: bolder;
 }
 
 .tu-main {
-    border-bottom:5px solid var(--border);
+    border-bottom: 5px solid var(--border);
 }
 
 .tu-subhead.keyf-box-head {
@@ -473,11 +475,11 @@ body {
 }
 
 .tu-head.keyf-head {
-    font-size:50px;
+    font-size: 50px;
 }
 
 .tu-logo {
-    margin-bottom:20px;
+    margin-bottom: 20px;
 }
 
 .tu-logo img {
@@ -489,6 +491,7 @@ body {
     0% {
         transform: rotate(0deg);
     }
+
     100% {
         transform: rotate(360deg);
     }
@@ -499,9 +502,11 @@ body {
     0% {
         filter: drop-shadow(0 0 0.5em #61dafbc3);
     }
+
     50% {
         filter: drop-shadow(0 0 3em #61dafbc3);
     }
+
     100% {
         filter: drop-shadow(0 0 0.5em #61dafbc3);
     }
@@ -511,16 +516,18 @@ body {
     0% {
         filter: drop-shadow(0 0 0.5em #e3b425);
     }
+
     50% {
         filter: drop-shadow(0 0 3em #e3b425);
     }
+
     100% {
         filter: drop-shadow(0 0 0.5em #e3b425);
     }
 }
 
 .react {
-    margin:30px 0;
+    margin: 30px 0;
     width: 140px;
     height: 130px;
     animation: spin 10s linear infinite;
@@ -537,4 +544,168 @@ body {
 
 .firebase img {
     animation: firebaseGlow 5s infinite;
+}
+
+.roboto-bold {
+    font-family: "Roboto", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+}
+
+.footer {
+    padding: 40px 20px;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: auto;
+}
+
+.top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 0 50px;
+}
+
+.hyperlinks {
+    width: fit-content;
+    height: fit-content;
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    grid-template-rows: auto auto auto;
+    margin-right: 50px;
+    row-gap: 20px;
+    column-gap: 70px;
+}
+
+.footer-font {
+    font-family: "Reddit Mono", monospace;
+    font-optical-sizing: auto;
+    font-weight: 200;
+    font-style: normal;
+}
+
+.hyperlinks>a {
+    color: rgba(255, 255, 255, 0.591);
+    text-decoration: none;
+    font-size: 18px;
+    letter-spacing: -1px;
+    word-spacing: -1px;
+    transition-duration: 0.6s;
+    width: fit-content;
+    height: fit-content;
+}
+
+.hyperlinks>a:hover {
+    color: white;
+    text-shadow: 0px 0px 5px white;
+    transition-duration: 0.2s;
+}
+
+.hyperlinks:has(.hyperlink:hover) .hyperlink:not(:hover) {
+    color: rgba(255, 255, 255, 0.133);
+    transition-duration: 0.6s;
+}
+
+.socials {
+    width: fit-content;
+    height: fit-content;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-template-rows: auto auto auto auto;
+    row-gap: 30px;
+    column-gap: 30px;
+}
+
+.social {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    color: rgba(255, 255, 255, 0.591);
+    text-decoration: none;
+    font-size: 18px;
+    transition-duration: 0.6s;
+    height: fit-content;
+}
+
+.social .logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: fit-content;
+    height: fit-content;
+    margin-right: 5px;
+}
+
+.insta {
+    color: #b43aa8;
+}
+
+.linkedin {
+    color: #0077B5;
+}
+
+.fiverr-logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #1DBF73;
+    font-size: 22px;
+    border-radius: 50%;
+    padding: 0px 10px;
+}
+
+.email {
+    color: #DB4437;
+}
+
+.codepen {
+    color: #3f4046;
+}
+
+.social-name {
+    font-size: 22px;
+}
+
+.social:hover .insta {
+    text-shadow: 0px 0px 15px #b43aa8aa;
+    transition-duration: 0.2s;
+}
+
+.social:hover .linkedin {
+    text-shadow: 0px 0px 15px #0076b5a8;
+    transition-duration: 0.2s;
+}
+
+.social:hover .fiverr-logo {
+    text-shadow: 0px 0px 15px #1dbf73ac;
+    transition-duration: 0.2s;
+}
+
+.social:hover .github {
+    text-shadow: 0px 0px 15px #3f40469e;
+    transition-duration: 0.2s;
+}
+
+.social:hover .email {
+    text-shadow: 0px 0px 15px #db4537bd;
+    transition-duration: 0.2s;
+}
+
+.social:hover .codepen {
+    text-shadow: 0px 0px 15px #3f4046b4;
+    transition-duration: 0.2s;
+}
+
+.social:hover .social-name {
+    color: white;
+    text-shadow: 0px 0px 5px white;
+    transition-duration: 0.2s;
+}
+
+.socials:has(.social:hover) .social:not(:hover) {
+    color: rgba(255, 255, 255, 0.133);
+    transition-duration: 0.6s;
 }

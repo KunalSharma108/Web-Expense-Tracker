@@ -89,11 +89,12 @@ function App(props) {
                   <Navbar learnActive='' meActive='' cuActive='' pfActive='' disabled={data == 'empty' ? "disabled" : ""} />
                   <Home cookie={data == 'empty' ? false : data} />
                   <Footer
-                    Link0='why' linkName0='Why Web-Expense-Tracker'
-                    Link1='keyf' linkName1='Key Features'
+                    Link0='why' linkName0='Benefits'
+                    Link1='keyf' linkName1='Features'
                     Link2='techUsed' linkName2='Tech Used'
-                    Link3='techUsed' linkName3='React ?'
-                    Link4='techUsed' linkName4='Firebase ?'
+                    Link3='techUsed' linkName3='React'
+                    Link4='techUsed' linkName4='Firebase'
+                    Link5='aboutUs' linkName5='About Us'                    
                      />
                 </>
 
