@@ -13,58 +13,55 @@ import { auth } from '../Auth/firebase';
 
 function SignUp() {
 
-    const buttonStyle = {
-        width: 'fit-content',
-        height: 'fit-content',
-        padding: '10px 22px',
-        fontSize: '25px'
-    }
+    const [passVisible, setPassVisible] = useState(false);
 
+    const togglePassEye = () => {
+        if (passVisible == false) {
+            setPassVisible(true)
+        } else if (passVisible == true) {
+            setPassVisible(false)
+        }
+    }
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
     const handleSignUp = (e) => {
         e.preventDefault();
 
-        try { 
+        try {
             createUserWithEmailAndPassword(auth, email, password)
-            .then((usercredentials) => console.log(usercredentials))
+                .then((usercredentials) => console.log(usercredentials))
         } catch (error) {
             console.log(error)
         }
     }
+
     return (
-        <div className='body-div my-3' >
-            <div className="vertical-center">
-                <div className="btn-group p-3 vertical-center" role="group" aria-label="Sign up and Sign in buttons" style={buttonStyle} >
-                    <Link
-                        type="button" style={buttonStyle} className={`btn btn-dark border border-white bg-warning`} to={'/User/SignUp'}>
+        <div className="sign-body-div">
+            <div className="sign-div">
+                <div className="sign-content">
+                    <div className="sign-head">
                         Sign Up
+                    </div>
+                    <div className="sign-form">
+                        <div className="input-main">
+                            <div className="input-logo"><i class="fa-solid fa-user"></i></div>
+                            <input type="email" name="email" id="email" className='input email-input' value={email} onChange={(e) => setEmail(e.target.value)} />
+                        </div>
+                        <div className="input-main">
+                            <div className="input-logo" onClick={togglePassEye}>
+                                {passVisible == false ? (<i class="fa-solid fa-eye-slash"></i>) : (<i class="fa-solid fa-eye"></i>)}
+                            </div>
+                            <input type={passVisible == false ? 'password' : 'text'} name="password" id="password" className='input password-input' value={password} onChange={(e) => setPassword(e.target.value)} />
+                        </div>
+
+                        <div className="button">
+                            <div className="form-btn" onClick={handleSignUp}>Sign Up</div>
+                        </div>
+                    </div>
+                    <Link className="change-form-div" to={'/User/SignIn'}>
+                        Already have an account? Sign In right now!
                     </Link>
-
-                    <Link
-                        type="button" style={buttonStyle} className={`btn btn-dark border border-white `} to={'/User/SignIn'}>
-                        Sign In
-                    </Link>
-                </div>
-            </div>
-
-            <div className="flex-center" data-bs-theme="dark">
-                <div className="container">
-                    <form className='container'>
-                        <div className="mb-3">
-                            <label htmlFor="email" className="form-label text-light">Email address</label>
-                            <input type="email" className="form-control bg-dark text-light" id="email" placeholder="Enter your email"  value={email} onChange={(e) => setEmail(e.target.value)} />
-                        </div>
-                        <div className="mb-3">
-                            <label htmlFor="password" className="form-label text-light">Password</label>
-                            <input type="password" className="form-control bg-dark text-light" id="password" placeholder="Enter your password" value={password} onChange={(e) => setPassword(e.target.value)}/>
-                        </div>
-
-                        <div className="d-flex justify-content-center"> 
-                            <button type="submit" className="btn btn-primary" onClick={handleSignUp}>Sign Up</button>
-                        </div>
-                    </form>
                 </div>
             </div>
         </div>

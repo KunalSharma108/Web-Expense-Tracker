@@ -251,7 +251,7 @@ body {
 
 .about-main {
     padding: 30px 60px;
-    border-bottom: 5px solid var(--border);
+    border-top: 5px solid var(--border);
 }
 
 .about-content {
@@ -553,20 +553,21 @@ body {
 }
 
 .footer {
-    padding: 40px 20px;
+    padding: 40px 20px 20px 20px;
 }
 
 .footer-content {
     display: grid;
     grid-template-columns: auto;
     grid-template-rows: auto;
+    padding: 0 50px;
+
 }
 
 .top {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    padding: 0 50px;
 }
 
 .hyperlinks {
@@ -617,6 +618,7 @@ body {
     grid-template-rows: auto auto auto auto;
     row-gap: 30px;
     column-gap: 30px;
+    transition-duration: 0.6s;
 }
 
 .social {
@@ -628,6 +630,11 @@ body {
     font-size: 18px;
     transition-duration: 0.6s;
     height: fit-content;
+    transition-duration: 0.6s;
+}
+
+.social>div {
+    transition-duration: 0.6s;
 }
 
 .social .logo {
@@ -706,6 +713,51 @@ body {
 }
 
 .socials:has(.social:hover) .social:not(:hover) {
-    color: rgba(255, 255, 255, 0.133);
+    opacity: 0.5;
     transition-duration: 0.6s;
+}
+
+.socials:has(.social:hover) .social:not(:hover)>div {
+    opacity: 0.5;
+    transition-duration: 0.6s;
+}
+
+.bottom {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.bottom-link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgb(71, 163, 255);
+    text-decoration: none;
+    font-size: 17px;
+    transition-duration: 0.4s;
+}
+
+.bottom-icon {
+    margin-right:5px;
+}
+
+.bottom-link:hover {
+    transition-duration: 0.4s;
+    color: rgb(34, 128, 222);
+}
+
+.sign-body-div {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sign-div {
+    border:3px solid #000;
+    background: #111;
+    box-shadow: 0px 0px 10px #000;
+    border-radius:10px;
+    padding:50px 30px;
 }

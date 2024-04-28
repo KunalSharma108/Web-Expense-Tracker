@@ -11,11 +11,11 @@ function Home(props) {
   return (
     <div className='home-main'  id='home'>
       <HomePicturetop cookie = {props.cookie}/>
+      <About />
       <WhyWET />
       <KeyFeatures />
       <GetStarted cookie = {props.cookie} />
       <TechUsed />
-      <About />
     </div>
   )
 }
