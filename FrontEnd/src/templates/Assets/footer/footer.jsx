@@ -13,7 +13,9 @@ function Footer(props) {
   return (
     <div className='footer'>
       <div className="footer-content">
-
+        <div className="footer-head">
+          Web Expense Tracker
+        </div>
         <div className="top">
           <div className="hyperlinks">
             {props.linkName0 && props.Link0 ? (

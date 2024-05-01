@@ -4,6 +4,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Lora:ital@1&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Reddit+Mono:wght@250&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@586&display=swap');
 
 :root {
     --border: rgba(70, 70, 70, 0.724);
@@ -556,12 +557,23 @@ body {
     padding: 40px 20px 20px 20px;
 }
 
+.footer-head {
+    font-size: 70px;
+    color: #1DBF73;
+    margin-bottom: 40px;
+    letter-spacing: 4px;
+    word-spacing: 3px;
+    font-family: "Dosis", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 586;
+    font-style: normal;
+}
+
 .footer-content {
     display: grid;
     grid-template-columns: auto;
     grid-template-rows: auto;
     padding: 0 50px;
-
 }
 
 .top {
@@ -739,7 +751,7 @@ body {
 }
 
 .bottom-icon {
-    margin-right:5px;
+    margin-right: 5px;
 }
 
 .bottom-link:hover {
@@ -755,9 +767,109 @@ body {
 }
 
 .sign-div {
-    border:3px solid #000;
+    border: 3px solid #000;
     background: #111;
     box-shadow: 0px 0px 10px #000;
-    border-radius:10px;
-    padding:50px 30px;
+    border-radius: 10px;
+    padding: 40px 30px;
+    width: fit-content;
+}
+
+.sign-content,
+.sign-form {
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: auto auto auto;
+}
+
+.sign-head {
+    text-align: center;
+    font-size: 40px;
+    font-weight: 100;
+    letter-spacing: 3px;
+    word-spacing: 2px;
+    color: #1DBF73;
+    text-shadow: 0px 0px 10px #1dbf7371;
+}
+
+.input-main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px 0;
+    border: 2px solid rgba(255, 255, 255, 0.519);
+    outline: none;
+    border-radius: 5px;
+    transition-duration: 0.5s;
+    background-color: #333;
+    color: white;
+}
+
+.input-main .input-logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 20%;
+    height: 40px;
+}
+
+.input-main .input-logo i {
+    transform: scale(1.2, 1.2);
+}
+
+.input-main input {
+    width: 370px;
+    height: 40px;
+    padding: 2px 2px 2px 10px;
+    outline: None;
+    border: none;
+    border-left: 2px solid rgba(255, 255, 255, 0.519);
+    background: transparent;
+    transition-duration: 0.5s;
+    color: rgba(255, 255, 255, 0.525);
+    font-size: 18px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.input-main:has(input:focus) {
+    box-shadow: 0px 0px 15px #333;
+    transition-duration: 0.5s;
+}
+
+.input-main input:focus {
+    color: white;
+    transition-duration: 0.5s;
+}
+
+.pass-logo {
+    cursor: pointer;
+}
+
+.change-form-div {
+    margin-top: -5px;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.47);
+    text-decoration: none;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    width: fit-content;
+    transition-duration: 0.4s;
+    margin-left: 2px;
+}
+
+.change-form-div:hover {
+    color: white;
+    transition-duration: 0.4s;
+}
+
+.form-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.form-btn .btn {
+    font-size:22px;
+    padding:10px 20px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }

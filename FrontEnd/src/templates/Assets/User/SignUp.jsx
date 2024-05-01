@@ -7,12 +7,11 @@ import {
 } from "react-router-dom";
 
 import { useState } from 'react';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../Auth/firebase';
+import firebase from 'firebase/compat/app';
 
 
 function SignUp() {
-
     const [passVisible, setPassVisible] = useState(false);
 
     const togglePassEye = () => {
@@ -22,6 +21,7 @@ function SignUp() {
             setPassVisible(false)
         }
     }
+
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
@@ -29,7 +29,7 @@ function SignUp() {
         e.preventDefault();
 
         try {
-            createUserWithEmailAndPassword(auth, email, password)
+            firebase.auth().createUserWithEmailAndPassword(email, password)
                 .then((usercredentials) => console.log(usercredentials))
         } catch (error) {
             console.log(error)
@@ -40,28 +40,27 @@ function SignUp() {
         <div className="sign-body-div">
             <div className="sign-div">
                 <div className="sign-content">
-                    <div className="sign-head">
-                        Sign Up
+                    <div className="sign-head roboto-black">
+                        Join Us!
                     </div>
                     <div className="sign-form">
                         <div className="input-main">
-                            <div className="input-logo"><i class="fa-solid fa-user"></i></div>
-                            <input type="email" name="email" id="email" className='input email-input' value={email} onChange={(e) => setEmail(e.target.value)} />
+                            <div className="input-logo"><i className="fa-solid fa-user"></i></div>
+                            <input type="email" name="email" id="email" placeholder='Enter Your Email' className='input email-input' value={email} onChange={(e) => setEmail(e.target.value)} />
                         </div>
                         <div className="input-main">
-                            <div className="input-logo" onClick={togglePassEye}>
-                                {passVisible == false ? (<i class="fa-solid fa-eye-slash"></i>) : (<i class="fa-solid fa-eye"></i>)}
+                            <div className="input-logo pass-logo" onClick={togglePassEye}>
+                                {passVisible == false ? (<i className="fa-solid fa-eye-slash"></i>) : (<i className="fa-solid fa-eye"></i>)}
                             </div>
-                            <input type={passVisible == false ? 'password' : 'text'} name="password" id="password" className='input password-input' value={password} onChange={(e) => setPassword(e.target.value)} />
+                            <input type={passVisible == false ? 'password' : 'text'} name="password" id="password" placeholder='Enter Your Password' className='input password-input' value={password} onChange={(e) => setPassword(e.target.value)} />
                         </div>
-
-                        <div className="button">
-                            <div className="form-btn" onClick={handleSignUp}>Sign Up</div>
+                        <Link className="change-form-div" to={'/User/SignIn'}>
+                            Already have an account?
+                        </Link>
+                        <div className='form-btn'>
+                            <div className="btn btn-success" onClick={handleSignUp}>Sign Up</div>
                         </div>
                     </div>
-                    <Link className="change-form-div" to={'/User/SignIn'}>
-                        Already have an account? Sign In right now!
-                    </Link>
                 </div>
             </div>
         </div>
