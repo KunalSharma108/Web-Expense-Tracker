@@ -11,11 +11,11 @@ function homePicturetop(props) {
             </div>
             <div className="home-heading titillium-web-heavy">Expense Manager</div>
             <div className="home-sub-heading titillium-web-light">-Take Control of Your Finances with Ease-</div>
-            <div className="button-row ">
+            <div className="button-row">
                 {props.cookie == false ? (
-                    <Link className="button text-light mx-3 titillium-web-heavy" to={'/user/SignUp'}>Sign Up/Sign In</Link>
-                ) : null}
-                <Link className="button text-light mx-3 titillium-web-heavy " to={'/user-guide'}>How to Manage ?</Link>
+                    <Link className="button text-light mx-3 titillium-web-heavy" to={'/user/SignUp'}>Get Started Today</Link>
+                ) : <Link className="button text-light mx-3 titillium-web-heavy " to={'/expense-work'}>Get Started</Link>}
+                
             </div>
         </div>
     </div>

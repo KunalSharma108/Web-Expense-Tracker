@@ -24,6 +24,7 @@ function SignUp() {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [username, setUsername] = useState('');
 
     const handleSignUp = (e) => {
         e.preventDefault();
@@ -46,6 +47,10 @@ function SignUp() {
                     <div className="sign-form">
                         <div className="input-main">
                             <div className="input-logo"><i className="fa-solid fa-user"></i></div>
+                            <input type="text" name="username" id="username" placeholder='Enter Your Username' className='input email-input' value={username} onChange={(e) => setUsername(e.target.value)} />
+                        </div>
+                        <div className="input-main">
+                            <div className="input-logo"><i class="fa-regular fa-envelope"></i></div>
                             <input type="email" name="email" id="email" placeholder='Enter Your Email' className='input email-input' value={email} onChange={(e) => setEmail(e.target.value)} />
                         </div>
                         <div className="input-main">
@@ -57,6 +62,9 @@ function SignUp() {
                         <Link className="change-form-div" to={'/User/SignIn'}>
                             Already have an account?
                         </Link>
+                        <div className="useless-stuff">
+                            
+                        </div>
                         <div className='form-btn'>
                             <div className="btn btn-success" onClick={handleSignUp}>Sign Up</div>
                         </div>
