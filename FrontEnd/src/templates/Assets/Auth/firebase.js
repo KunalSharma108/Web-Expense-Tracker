@@ -2,6 +2,7 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getAuth } from "firebase/auth";
+
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -13,8 +14,8 @@ const firebaseConfig = {
   projectId: "web-expense-tracker-22aca",
   storageBucket: "web-expense-tracker-22aca.appspot.com",
   messagingSenderId: "96644110295",
-  appId: "1:96644110295:web:93d2d85d3234876b471d92",
-  measurementId: "G-Y3QG9XM9ZN"
+  appId: "1:96644110295:web:0ac392cb49fd69c0471d92",
+  measurementId: "G-KNJH5J2C45"
 };
 
 // Initialize Firebase

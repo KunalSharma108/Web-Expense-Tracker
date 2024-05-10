@@ -22,3 +22,5 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+FrontEnd/src/templates/Assets/Auth/firebase.js

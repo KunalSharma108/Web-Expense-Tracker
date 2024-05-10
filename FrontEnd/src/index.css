@@ -215,9 +215,9 @@ body {
 
 .button {
     cursor: pointer;
-    color:white;
-    background:rgb(73, 171, 73);
-    border:2px solid rgb(73, 171, 73);
+    color: white;
+    background: rgb(73, 171, 73);
+    border: 2px solid rgb(73, 171, 73);
     padding: 10px 12px;
     font-size: 28px;
     border-radius: 4px;
@@ -229,7 +229,7 @@ body {
 
 .button:hover {
     background: rgb(66, 155, 66);
-    border:2px solid rgb(66, 155, 66);
+    border: 2px solid rgb(66, 155, 66);
     transition-duration: 0.2s;
 }
 
@@ -766,7 +766,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image:  linear-gradient(rgba(0, 0, 0, 0.443),rgba(0, 0, 0, 0.403)), url(templates\Assets\images\darkbg.jpg);
+    background-image: linear-gradient(rgba(0, 0, 0, 0.443), rgba(0, 0, 0, 0.403)), url(templates\Assets\images\darkbg.jpg);
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -870,11 +870,53 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 .form-btn .btn {
-    font-size:22px;
-    padding:10px 20px;
+    font-size: 22px;
+    padding: 10px 20px;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.check {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top:10px;
+}
+
+.check label {
+    font-size: 20px;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    margin-left:10px;
+}
+
+.check input {
+    outline:none;
+    border:1px solid white;
+    background: transparent;
+    cursor: pointer;
+    width:40px;
+    height: 32px;
+}
+
+.note {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width:400px;
+    margin-top:10px;
+    color:rgba(255, 255, 255, 0.486);
+    font-family:serif;
+    font-size:14px;
+}
+
+.text-danger.warning {
+    margin-top:-5px;
+    font-size:12px;
+    font-weight: 100;
+    font-style: italic;
+    margin-bottom:-10px;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
 }
