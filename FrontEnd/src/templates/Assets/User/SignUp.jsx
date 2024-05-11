@@ -8,9 +8,7 @@ import {
 
 import { useState } from 'react';
 import { auth } from '../Auth/firebase';
-import firebase from 'firebase/compat/app';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-
 
 function SignUp() {
     const [passVisible, setPassVisible] = useState(false);
@@ -72,11 +70,39 @@ function SignUp() {
                 robotErr: true
             })
         } else {
-            try {
-                firebase.auth.createUserWithEmailAndPassword(email, password)
-                    .then((usercredentials) => console.log(usercredentials))
-            } catch (error) {
-                console.log(error)
+            if (password.length < 6) {
+                setErr({
+                    userErr: false,
+                    emailErr: false,
+                    passErr: true,
+                    robotErr: false
+                })
+            } else {
+                try {
+                    console.log(`email : ${email}      password : ${password}`)
+                    createUserWithEmailAndPassword(auth, email, password)
+                        .then((usercredentials) => console.log(usercredentials))
+                        .catch((Error) => {
+                            if (Error.code == 'auth/invalid-email') {
+                                console.log("Invalid email!");
+                                setErr({
+                                    userErr: false,
+                                    emailErr: true,
+                                    passErr: true,
+                                    robotErr: false
+                                });
+                            } 
+                        })
+
+                } catch (error) {
+                    console.log(error)
+                    setErr({
+                        userErr: false,
+                        emailErr: true,
+                        passErr: true,
+                        robotErr: false
+                    })
+                }
             }
         }
     }
@@ -94,25 +120,27 @@ function SignUp() {
 
                             {err.userErr == true ? (
                                 <div className="text-danger warning">
-                                    Username is required!
+                                    Username is required.
                                 </div>
                             ) : null}
                             <div className="input-main">
                                 <div className="input-logo"><i className="fa-solid fa-user"></i></div>
                                 <input type="text" name="username" id="username" placeholder='Enter Your Username' className='input email-input' value={username} onChange={(e) => setUsername(e.target.value)} required />
                             </div>
+
                             {err.emailErr == true ? (
                                 <div className="text-danger warning">
-                                    Email is required!
+                                    Invalid Email.
                                 </div>
                             ) : null}
                             <div className="input-main">
                                 <div className="input-logo"><i className="fa-regular fa-envelope"></i></div>
                                 <input type="email" name="email" id="email" placeholder='Enter Your Email' className='input email-input' value={email} onChange={(e) => setEmail(e.target.value)} required />
                             </div>
+
                             {err.passErr == true ? (
                                 <div className="text-danger warning">
-                                    Password is required!
+                                    Password should be more than 6 characters.
                                 </div>
                             ) : null}
                             <div className="input-main">
@@ -121,12 +149,14 @@ function SignUp() {
                                 </div>
                                 <input type={passVisible == false ? 'password' : 'text'} name="password" id="password" placeholder='Enter Your Password' className='input password-input' value={password} onChange={(e) => setPassword(e.target.value)} required />
                             </div>
+
                             <Link className="change-form-div" to={'/User/SignIn'}>
                                 Already have an account?
                             </Link>
+
                             {err.robotErr == true ? (
                                 <div className="text-danger warning">
-                                    We have to make sure you are not a robot.
+                                    We want no Robots!
                                 </div>
                             ) : null}
                             <div className="check">
