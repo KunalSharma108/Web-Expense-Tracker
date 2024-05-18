@@ -7,8 +7,10 @@ import {
 } from "react-router-dom";
 
 import { useState } from 'react';
-import { auth } from '../Auth/firebase';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { app } from '../Auth/firebase';
+import { createUserWithEmailAndPassword, updateProfile, getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import firebase from 'firebase/compat/app';
+
 
 function SignUp() {
     const [passVisible, setPassVisible] = useState(false);
@@ -29,14 +31,15 @@ function SignUp() {
         userErr: false,
         emailErr: false,
         passErr: false,
-        robotErr: false
+        robotErr: false,
+        emailAlreadyInUse: false
     })
 
     const handleCheckboxChange = () => {
         setIsChecked(!isChecked);
     };
 
-    const handleSignUp = (e) => {
+    const handleSignUp = async (e) => {
         e.preventDefault();
 
         if (email.trim() == '' || password.trim() == '' || username.trim() == '') {
@@ -45,21 +48,24 @@ function SignUp() {
                     userErr: true,
                     emailErr: false,
                     passErr: false,
-                    robotErr: false
+                    robotErr: false,
+                    emailAlreadyInUse: false
                 })
             } else if (email.trim() == '') {
                 setErr({
                     userErr: false,
                     emailErr: true,
                     passErr: false,
-                    robotErr: false
+                    robotErr: false,
+                    emailAlreadyInUse: false
                 })
             } else if (password.trim() == '') {
                 setErr({
                     userErr: false,
                     emailErr: false,
                     passErr: true,
-                    robotErr: false
+                    robotErr: false,
+                    emailAlreadyInUse: false
                 })
             }
         } else if (isChecked == false) {
@@ -67,7 +73,8 @@ function SignUp() {
                 userErr: false,
                 emailErr: false,
                 passErr: false,
-                robotErr: true
+                robotErr: true,
+                emailAlreadyInUse: false
             })
         } else {
             if (password.length < 6) {
@@ -75,24 +82,49 @@ function SignUp() {
                     userErr: false,
                     emailErr: false,
                     passErr: true,
-                    robotErr: false
+                    robotErr: false,
+                    emailAlreadyInUse: false
                 })
             } else {
                 try {
-                    console.log(`email : ${email}      password : ${password}`)
-                    createUserWithEmailAndPassword(auth, email, password)
-                        .then((usercredentials) => console.log(usercredentials))
+                    const auth = getAuth(app);
+                    createUserWithEmailAndPassword(auth, email, password).then(async (userCredentials) => {
+                        try {
+                            console.log('sign up process')
+                            const user = userCredentials.user;
+                            await updateProfile(user, {
+                                displayName: username
+                            });
+
+                            console.log('sign in process')
+
+                            signInWithEmailAndPassword(auth, email, password).then(async (userCredentials) => {
+                                console.log(userCredentials)
+                            })
+                        } catch (error) {
+                            console.log(`There was an error : ${error}`)
+                        }
+                    })
                         .catch((Error) => {
                             if (Error.code == 'auth/invalid-email') {
-                                console.log("Invalid email!");
                                 setErr({
                                     userErr: false,
                                     emailErr: true,
                                     passErr: true,
-                                    robotErr: false
+                                    robotErr: false,
+                                    emailAlreadyInUse: false
                                 });
-                            } 
+                            } else if (Error.code == 'auth/email-already-in-use') {
+                                setErr({
+                                    userErr: false,
+                                    emailErr: false,
+                                    passErr: false,
+                                    robotErr: false,
+                                    emailAlreadyInUse: true
+                                });
+                            }
                         })
+                    console.log('done')
 
                 } catch (error) {
                     console.log(error)
@@ -131,6 +163,10 @@ function SignUp() {
                             {err.emailErr == true ? (
                                 <div className="text-danger warning">
                                     Invalid Email.
+                                </div>
+                            ) : err.emailAlreadyInUse == true ? (
+                                <div className="text-danger warning">
+                                    Email already in use.
                                 </div>
                             ) : null}
                             <div className="input-main">
@@ -182,8 +218,8 @@ function SignUp() {
                         </form>
                     </div>
                 </div>
-            </div>
-        </div>
+            </div >
+        </div >
     )
 }
 
