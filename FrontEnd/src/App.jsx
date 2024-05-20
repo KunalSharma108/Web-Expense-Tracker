@@ -20,7 +20,7 @@ import Home from './templates/Assets/Home/Home';
 
 function App(props) {
   const [backEndonline, setBackendOnline] = useState('loading');
-  const [data, setData] = useState('empty');
+  const [data, setData] = useState();
 
   const fetchData = async () => {
     let tries = 1;
@@ -52,27 +52,38 @@ function App(props) {
     }
   };
 
+  const fetchCookie = () => {
+    const filterCookie = (obj, keysToKeep) => {
+      let filterArray = {}
 
-  useEffect(() => {
-    const cookie = document.cookie;
-    if (cookie.trim() === '') {
-      setData('empty');
-    } else {
-      const cookieArray = cookie.split(';');
-      const cookieObject = {};
+      keysToKeep.forEach(key => {
+        if (obj.hasOwnProperty(key)) {
+          filterArray[key] = obj[key];
+        } else {
+          filterArray[key] = false;
+        }
+      });
+
+      return filterArray;
+    }
+    let cookie = document.cookie;
+
+    if (cookie.trim() !== '') {
+      let cookieArray = cookie.split(';');
+      let cookieObject = {}
 
       cookieArray.forEach(cookie => {
         const [key, value] = cookie.split('=');
         cookieObject[key.trim()] = value.trim();
-      });
+      })
 
-      if (cookieObject['username'] && cookieObject['email'] && cookieObject['password'] && cookieObject['login']) {
-        setData(cookieObject);
-      }
-      else {
-        setData('empty')
-      }
+      cookieObject = filterCookie(cookieObject, ['displayName', 'Email'])
+      setData(cookieObject)
     }
+  }
+
+  useEffect(() => {
+    fetchCookie();
     fetchData();
 
   }, []);
@@ -86,16 +97,16 @@ function App(props) {
               backEndonline == 'loading' ? <Loading class='' /> : backEndonline == true ? (
 
                 <>
-                  <Navbar learnActive='' meActive='' cuActive='' pfActive='' disabled={data == 'empty' ? "disabled" : ""} />
-                  <Home cookie={data == 'empty' ? false : data} />
+                  <Navbar learnActive='' meActive='' cuActive='' pfActive='' disabled={data} />
+                  <Home Data={data} />
                   <Footer
                     Link0='why' linkName0='Benefits'
                     Link1='keyf' linkName1='Features'
                     Link2='techUsed' linkName2='Tech Used'
                     Link3='techUsed' linkName3='React'
                     Link4='techUsed' linkName4='Firebase'
-                    Link5='aboutUs' linkName5='About Us'                    
-                     />
+                    Link5='aboutUs' linkName5='About Us'
+                  />
                 </>
 
               ) : backEndonline == 'loadingDone' ? <Loading class='startAnimation' /> : <Offline />
@@ -105,7 +116,7 @@ function App(props) {
               backEndonline == 'loading' ? <Loading class='' /> : backEndonline == true ? (
 
                 <>
-                  <Navbar learnActive='' meActive='active' cuActive='' pfActive='' disabled={data == 'empty' ? "disabled" : ""} />
+                  <Navbar learnActive='' meActive='active' cuActive='' pfActive='' disabled={data} />
                   <ExpenseWork />
                   <Footer />
                 </>
@@ -117,7 +128,7 @@ function App(props) {
               backEndonline == 'loading' ? <Loading class='' /> : backEndonline == true ? (
 
                 <>
-                  <Navbar learnActive='' meActive='' cuActive='active' pfActive='' disabled={data == 'empty' ? "disabled" : ""} />
+                  <Navbar learnActive='' meActive='' cuActive='active' pfActive='' disabled={data} />
                   <ContactUs />
                   <Footer />
                 </>
@@ -140,7 +151,7 @@ function App(props) {
               backEndonline == 'loading' ? <Loading class='' /> : backEndonline == true ? (
 
                 <>
-                  <Navbar learnActive='active' meActive='' cuActive='' pfActive='' disabled={data == 'empty' ? "disabled" : ""} />
+                  <Navbar learnActive='active' meActive='' cuActive='' pfActive='' disabled={data} />
                   <Learn />
                   <Footer />
                 </>

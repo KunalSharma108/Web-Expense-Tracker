@@ -4,9 +4,9 @@ import { Link } from 'react-router-dom'
 
 function GetStarted(props) {
     const loginContent = (
-        <>
-            Start Using our services right now and <Link className="btn btn-success" to={'/expense-work'}>Manage Expenses</Link>
-        </>
+        <div>
+            <div className='keyword'> Effecient tracking, Statistics of your Expenses and More!</div> <div>Start Using our services right now and <Link className="btn btn-success mx-1" to={'/expense-work'}>Manage Expenses</Link></div>
+        </div>
     )
 
     const SignUpContent = (
@@ -22,7 +22,7 @@ function GetStarted(props) {
                     Get Started
                 </div>
                 <div className="gs-p-content">
-                    {props.cookie['login'] == 'true' ? loginContent : SignUpContent}
+                    {props.Data.displayName == false || props.Data.Email == false ? SignUpContent : loginContent}
                 </div>
             </div>
         </div>

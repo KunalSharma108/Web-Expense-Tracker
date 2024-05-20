@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,466;1,466&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Lora:ital@1&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Reddit+Mono:wght@250&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Dosis:wght@586&display=swap');
 
@@ -96,8 +96,9 @@ body {
 
 .roboto-black {
     font-family: "Roboto", sans-serif;
-    font-weight: 900;
+    font-weight: 600;
     font-style: normal;
+    letter-spacing: 1px;
 }
 
 .navbar-brand {
@@ -919,4 +920,48 @@ body {
     font-style: italic;
     margin-bottom:-10px;
     font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
+}
+
+.gs-p-content div {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.gs-p-content div .keyword {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: fit-content;
+    height: fit-content;
+    font-weight: 700;
+    font-size:21px;
+    word-spacing: 2px;
+}
+
+.gs-p-content div > div {
+    margin-left:10px;
+}
+
+.logout {
+    margin-right:30px;
+    display: flex;
+    justify-content: center;
+    row-gap:10px;
+    cursor: pointer;
+    width: fit-content;
+    height: fit-content;
+}
+
+.logout i {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transform: scale(1.9,1.9);
+    color:rgba(255, 255, 255, 0.611);
+}
+
+.logout-content {
+    font-size:12px;
 }

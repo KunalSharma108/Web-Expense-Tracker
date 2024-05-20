@@ -3,16 +3,18 @@ import {
     BrowserRouter as Router,
     Routes,
     Route,
-    Link
+    Link,
+    useNavigate
 } from "react-router-dom";
 
 import { useState } from 'react';
 import { app } from '../Auth/firebase';
-import { createUserWithEmailAndPassword, updateProfile, getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, updateProfile, getAuth, signInWithEmailAndPassword, signOut } from 'firebase/auth';
 import firebase from 'firebase/compat/app';
 
 
 function SignUp() {
+    const Navigate = useNavigate();
     const [passVisible, setPassVisible] = useState(false);
 
     const togglePassEye = () => {
@@ -90,19 +92,20 @@ function SignUp() {
                     const auth = getAuth(app);
                     createUserWithEmailAndPassword(auth, email, password).then(async (userCredentials) => {
                         try {
-                            console.log('sign up process')
                             const user = userCredentials.user;
                             await updateProfile(user, {
                                 displayName: username
                             });
 
-                            console.log('sign in process')
+                            document.cookie = `displayName=${userCredentials.user.displayName}`;
+                            document.cookie = `Email=${userCredentials.user.email}`;
 
-                            signInWithEmailAndPassword(auth, email, password).then(async (userCredentials) => {
-                                console.log(userCredentials)
-                            })
+                            Navigate('/')
+
                         } catch (error) {
                             console.log(`There was an error : ${error}`)
+                            signOut()
+                            window.alert('Something went wrong!')
                         }
                     })
                         .catch((Error) => {
@@ -124,7 +127,6 @@ function SignUp() {
                                 });
                             }
                         })
-                    console.log('done')
 
                 } catch (error) {
                     console.log(error)

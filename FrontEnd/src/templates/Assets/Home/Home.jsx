@@ -9,12 +9,12 @@ import TechUsed from './TechUsed'
 
 function Home(props) {
   return (
-    <div className='home-main'  id='home'>
-      <HomePicturetop cookie = {props.cookie}/>
+    <div className='home-main' id='home'>
+      <HomePicturetop Data={props.Data} />
       <About />
       <WhyWET />
       <KeyFeatures />
-      <GetStarted cookie = {props.cookie} />
+      <GetStarted Data={props.Data}/>
       <TechUsed />
     </div>
   )
