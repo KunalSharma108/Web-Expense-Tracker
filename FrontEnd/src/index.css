@@ -949,6 +949,7 @@ body {
     justify-content: center;
     row-gap:10px;
     cursor: pointer;
+    transition-duration: 0.3s;
     width: fit-content;
     height: fit-content;
 }
@@ -957,11 +958,22 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    transition-duration: 0.3s;
     cursor: pointer;
     transform: scale(1.9,1.9);
     color:rgba(255, 255, 255, 0.611);
 }
 
+.logout:hover i {
+    color:white;
+    transition-duration: 0.3s;
+}
+
 .logout-content {
     font-size:12px;
+}
+
+.signIn-form {
+    margin-top:30px;
+    margin-bottom:30px;
 }

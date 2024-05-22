@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "firebase": "^10.10.0"
+    "firebase": "^10.10.0",
+    "js-cookie": "^3.0.5"
   }
 }

@@ -3,77 +3,193 @@ import {
     BrowserRouter as Router,
     Routes,
     Route,
-    Link
+    Link,
+    useNavigate
 } from "react-router-dom";
 
 import { useState } from 'react';
-import { signInWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../Auth/firebase';
+import { app } from '../Auth/firebase';
+import { createUserWithEmailAndPassword, updateProfile, getAuth, signInWithEmailAndPassword, signOut } from 'firebase/auth';
+import firebase from 'firebase/compat/app';
+import Cookies from 'js-cookie';
 
-function SignIn() {
 
-    const buttonStyle = {
-        width: 'fit-content',
-        height: 'fit-content',
-        padding: '10px 22px',
-        fontSize: '25px'
+function SignUp() {
+    const Navigate = useNavigate();
+    const [passVisible, setPassVisible] = useState(false);
+
+    const togglePassEye = () => {
+        if (passVisible == false) {
+            setPassVisible(true)
+        } else if (passVisible == true) {
+            setPassVisible(false)
+        }
     }
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [isChecked, setIsChecked] = useState(false);
+    const [err, setErr] = useState({
+        emailErr: false,
+        passErr: false,
+        robotErr: false,
+    })
 
-    const handleSignIn = (e) => {
+    const handleCheckboxChange = () => {
+        setIsChecked(!isChecked);
+    };
+
+    const handleSignIn = async (e) => {
         e.preventDefault();
 
-        try { 
-            signInWithEmailAndPassword(auth, email, password)
-            .then((usercredentials) => {
-                let Email = usercredentials.user.email
-                console.log(Email)
-                document.cookie = `email=${Email};`;
-                console.log(document.cookie)
+        if (email.trim() == '' || password.trim() == '') {
+            if (username.trim() == '') {
+                setErr({
+                    emailErr: false,
+                    passErr: false,
+                    robotErr: false,
+                })
+            } else if (email.trim() == '') {
+                setErr({
+                    emailErr: true,
+                    passErr: false,
+                    robotErr: false,
+                })
+            } else if (password.trim() == '') {
+                setErr({
+                    emailErr: false,
+                    passErr: true,
+                    robotErr: false,
+                })
+            }
+        } else if (isChecked == false) {
+            setErr({
+                emailErr: false,
+                passErr: false,
+                robotErr: true,
             })
-            
-        } catch (error) {
-            console.log(error)
-        }
+        } else {
+            if (password.length < 6) {
+                setErr({
+                    emailErr: false,
+                    passErr: true,
+                    robotErr: false,
+                })
+            } else {
+                try {
+                    const auth = getAuth(app);
+                    signInWithEmailAndPassword(auth, email, password).then(async (userCredentials) => {
+                        try {
+                            document.cookie = `displayName=${userCredentials.user.displayName}`;
+                            document.cookie = `Email=${userCredentials.user.email}`;
 
+                            Navigate('/')
+                            window.location.reload();
+
+                        } catch (error) {
+                            console.log(`There was an error : ${error}`)
+                            signOut()
+                            window.alert('Something went wrong!')
+                        }
+                    })
+                        .catch((Error) => {
+                            if (Error.code == 'auth/invalid-email') {
+                                setErr({
+                                    emailErr: true,
+                                    passErr: true,
+                                    robotErr: false,
+                                });
+                            } else if (Error.code == 'auth/user-not-found') {
+                                setErr({
+                                    emailErr: true,
+                                    passErr: true,
+                                    robotErr: false,
+                                });
+                            } else {
+                                setErr({
+                                    emailErr: true,
+                                    passErr: true,
+                                    robotErr: false,
+                                });
+                            }
+                        })
+
+                } catch (error) {
+                    console.log(error)
+                    console.log('this')
+                    setErr({
+                        emailErr: true,
+                        passErr: true,
+                        robotErr: false
+                    })
+                }
+            }
+        }
     }
 
+
     return (
-        <div className='body-div my-3'>
-            <div className="vertical-center">
-                <div className="btn-group p-3 vertical-center" role="group" aria-label="Sign up and Sign in buttons" style={buttonStyle} >
-                    <Link
-                        type="button" style={buttonStyle} className={`btn btn-dark border border-white`} to={'/User/SignUp'}>
-                        Sign Up
-                    </Link>
+        <div className="sign-body-div">
+            <div className="sign-div">
+                <div className="sign-content">
+                    <div className="sign-head roboto-black">
+                        Welcome Back!
+                    </div>
+                    <div className="sign-form signIn-form">
+                        <form action="">
 
-                    <Link
-                        type="button" style={buttonStyle} className={`btn btn-dark border border-white bg-warning`} to={'/User/SignIn'}>
-                        Sign In
-                    </Link>
+                            {err.emailErr == true ? (
+                                <div className="text-danger warning">
+                                    Invalid Email.
+                                </div>
+                            ) : null}
+                            <div className="input-main">
+                                <div className="input-logo"><i className="fa-regular fa-envelope"></i></div>
+                                <input type="email" name="email" id="email" placeholder='Enter Your Email' className='input email-input' value={email} onChange={(e) => setEmail(e.target.value)} required />
+                            </div>
+
+                            {err.passErr == true ? (
+                                <div className="text-danger warning">
+                                    Password is incorrect!
+                                </div>
+                            ) : null}
+                            <div className="input-main">
+                                <div className="input-logo pass-logo" onClick={togglePassEye}>
+                                    {passVisible == false ? (<i className="fa-solid fa-eye-slash"></i>) : (<i className="fa-solid fa-eye"></i>)}
+                                </div>
+                                <input type={passVisible == false ? 'password' : 'text'} name="password" id="password" placeholder='Enter Your Password' className='input password-input' value={password} onChange={(e) => setPassword(e.target.value)} required />
+                            </div>
+
+                            <Link className="change-form-div" to={'/User/SignUp'}>
+                                Dont have an account?
+                            </Link>
+
+                            {err.robotErr == true ? (
+                                <div className="text-danger warning">
+                                    We want no Robots!
+                                </div>
+                            ) : null}
+                            <div className="check">
+                                <input
+                                    type="checkbox"
+                                    checked={isChecked}
+                                    onChange={handleCheckboxChange}
+                                    className='checkbox'
+                                    required
+                                />
+                                <label>
+                                    I am not a Robot.
+                                </label>
+                            </div>
+                        </form>
+                    </div>
+                    <div className='form-btn'>
+                        <button className="btn btn-success" onClick={handleSignIn}>Log In</button>
+                    </div>
                 </div>
-            </div>
-
-            <div className="flex-center" data-bs-theme="dark">
-                <div className="container" data-bs-theme="dark">
-                    <form className='container data-bs-theme="dark"'>
-                        <div className="mb-3">
-                            <label htmlFor="email" className="form-label text-light">Email address</label>
-                            <input type="email" className="form-control bg-dark text-light" id="email" placeholder="Enter your email" value={email} onChange={(e) => setEmail(e.target.value)}/>
-                        </div>
-                        <div className="mb-3">
-                            <label htmlFor="password" className="form-label text-light">Password</label>
-                            <input type="password" className="form-control bg-dark text-light" id="password" placeholder="Enter your password" value={password} onChange={(e) => setPassword(e.target.value)}/>
-                        </div>
-                        <button type="submit" className="btn btn-primary" onClick={handleSignIn}>Sign In</button>
-                    </form>
-                </div>
-            </div>
-
-        </div>
+            </div >
+        </div >
     )
 }
 
-export default SignIn
+export default SignUp

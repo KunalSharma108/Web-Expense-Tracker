@@ -1,7 +1,21 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie';
 
 function Navbar(props) {
+    const handleSignOut = () => {
+        try {
+            Cookies.remove('displayName');
+            Cookies.remove('Email');
+
+            window.alert('You have successfully signed out!');
+            window.location.reload();
+        } catch (error) {
+            console.log(`There was an error : ${error}`)
+            window.alert('There was a problem signing out, Try again later!')
+        }
+    }
+
     const signUpbutton = (
         <Link className="right-container" to={'/user/SignUp'}>
             <i className="fa-solid fa-user-plus"></i>
@@ -43,10 +57,10 @@ function Navbar(props) {
                         </li>
                     </ul>
                 </div>
-                <div className='logout' title='Sign Out'>
+                <div className='logout' title='Sign Out' onClick={handleSignOut}>
                     {props.disabled.displayName != false && props.disabled.Email != false ? (
                         <>
-                            <i className="fa-solid fa-right-from-bracket"></i>
+                            <i className="fa-solid fa-right-from-bracket" onClick={handleSignOut}></i>
                         </>
                     ) : null
                     }

@@ -101,6 +101,7 @@ function SignUp() {
                             document.cookie = `Email=${userCredentials.user.email}`;
 
                             Navigate('/')
+                            window.location.reload();
 
                         } catch (error) {
                             console.log(`There was an error : ${error}`)
