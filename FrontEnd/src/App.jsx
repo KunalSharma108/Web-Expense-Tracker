@@ -162,7 +162,6 @@ function App(props) {
             <Route path='/user/SignUp' element={<SignUp />}></Route>
             <Route path='/user/SignIn' element={<SignIn />}></Route>
 
-
           </Routes>
         </div>
       </Router>

@@ -1,9 +1,12 @@
 import React from 'react'
+import Sidebar from './sidebar'
+import ExpenseContent from './Expense-content'
 
 function ExpenseWork() {
   return (
-    <div>
-      <h1>this is expense work</h1>
+    <div className='Ex-div'>
+      <Sidebar />
+      <ExpenseContent />
     </div>
   )
 }
