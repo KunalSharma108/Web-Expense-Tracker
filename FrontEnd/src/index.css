@@ -112,7 +112,7 @@ body {
 
 .footer {
     background-color: #111;
-    border-top:4px solid var(--border)
+    border-top: 4px solid var(--border)
 }
 
 .nav-link:hover {
@@ -885,21 +885,21 @@ body {
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    margin-top:10px;
+    margin-top: 10px;
 }
 
 .check label {
     font-size: 20px;
-    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    margin-left:10px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    margin-left: 10px;
 }
 
 .check input {
-    outline:none;
-    border:1px solid white;
+    outline: none;
+    border: 1px solid white;
     background: transparent;
     cursor: pointer;
-    width:40px;
+    width: 40px;
     height: 32px;
 }
 
@@ -907,20 +907,20 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    width:400px;
-    margin-top:10px;
-    color:rgba(255, 255, 255, 0.486);
-    font-family:serif;
-    font-size:14px;
+    width: 400px;
+    margin-top: 10px;
+    color: rgba(255, 255, 255, 0.486);
+    font-family: serif;
+    font-size: 14px;
 }
 
 .text-danger.warning {
-    margin-top:-5px;
-    font-size:12px;
+    margin-top: -5px;
+    font-size: 12px;
     font-weight: 100;
     font-style: italic;
-    margin-bottom:-10px;
-    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
+    margin-bottom: -10px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
 }
 
 .gs-p-content div {
@@ -936,19 +936,19 @@ body {
     width: fit-content;
     height: fit-content;
     font-weight: 700;
-    font-size:21px;
+    font-size: 21px;
     word-spacing: 2px;
 }
 
-.gs-p-content div > div {
-    margin-left:10px;
+.gs-p-content div>div {
+    margin-left: 10px;
 }
 
 .logout {
-    margin-right:30px;
+    margin-right: 30px;
     display: flex;
     justify-content: center;
-    row-gap:10px;
+    row-gap: 10px;
     cursor: pointer;
     transition-duration: 0.3s;
     width: fit-content;
@@ -961,31 +961,32 @@ body {
     align-items: center;
     transition-duration: 0.3s;
     cursor: pointer;
-    transform: scale(1.9,1.9);
-    color:rgba(255, 255, 255, 0.611);
+    transform: scale(1.9, 1.9);
+    color: rgba(255, 255, 255, 0.611);
 }
 
 .logout:hover i {
-    color:white;
+    color: white;
     transition-duration: 0.3s;
 }
 
 .logout-content {
-    font-size:12px;
+    font-size: 12px;
 }
 
 .signIn-form {
-    margin-top:30px;
-    margin-bottom:30px;
+    margin-top: 30px;
+    margin-bottom: 30px;
 }
 
-.Ex-div  {
+.Ex-div {
     min-height: 90vh;
 }
 
 .sidebar {
     height: 90vh;
     width: 18%;
-    background: #000;
+    background: #111;
     float: left;
+    box-shadow: 10px 0px 8px #111;
 }
