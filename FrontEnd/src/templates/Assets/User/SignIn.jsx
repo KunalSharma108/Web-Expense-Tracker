@@ -80,8 +80,12 @@ function SignUp() {
                     const auth = getAuth(app);
                     signInWithEmailAndPassword(auth, email, password).then(async (userCredentials) => {
                         try {
-                            document.cookie = `displayName=${userCredentials.user.displayName}`;
-                            document.cookie = `Email=${userCredentials.user.email}`;
+
+                            Cookies.set('displayName', userCredentials.user.displayName, { expires: 30 });
+                            Cookies.set('Email', userCredentials.user.email, { expires: 30 });
+                            
+                            // document.cookie = `displayName=${userCredentials.user.displayName}`;
+                            // document.cookie = `Email=${userCredentials.user.email}`;
 
                             Navigate('/')
                             window.location.reload();

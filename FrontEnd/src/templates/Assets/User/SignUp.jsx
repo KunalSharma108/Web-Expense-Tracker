@@ -11,6 +11,7 @@ import { useState } from 'react';
 import { app } from '../Auth/firebase';
 import { createUserWithEmailAndPassword, updateProfile, getAuth, signInWithEmailAndPassword, signOut } from 'firebase/auth';
 import firebase from 'firebase/compat/app';
+import Cookies from 'js-cookie';
 
 
 function SignUp() {
@@ -97,8 +98,11 @@ function SignUp() {
                                 displayName: username
                             });
 
-                            document.cookie = `displayName=${userCredentials.user.displayName}`;
-                            document.cookie = `Email=${userCredentials.user.email}`;
+                            Cookies.set('displayName', userCredentials.user.displayName, { expires: 30 });
+                            Cookies.set('Email', userCredentials.user.email, { expires: 30 });
+
+                            // document.cookie = `displayName=${userCredentials.user.displayName}`;
+                            // document.cookie = `Email=${userCredentials.user.email}`;
 
                             Navigate('/')
                             window.location.reload();

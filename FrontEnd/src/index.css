@@ -9,6 +9,7 @@
 :root {
     --border: rgba(70, 70, 70, 0.724);
     --letterSpacing: 1.5px;
+    --mainColor:rgb(25,135,84);
 }
 
 ::selection {
@@ -218,8 +219,8 @@ body {
 .button {
     cursor: pointer;
     color: white;
-    background: rgb(73, 171, 73);
-    border: 2px solid rgb(73, 171, 73);
+    background: var(--mainColor);
+    border: 2px solid var(--mainColor);
     padding: 10px 12px;
     font-size: 28px;
     border-radius: 4px;
@@ -988,5 +989,44 @@ body {
     width: 18%;
     background: #111;
     float: left;
-    box-shadow: 10px 0px 8px #111;
+    border-right: 6px solid var(--mainColor);
+    box-shadow: 0px 0px 28px var(--mainColor);
+    overflow: auto;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.top-btn {
+    width: 90%;
+    margin-left: 5%;
+    margin-top: 10px;
+    background-color: #222;
+    box-shadow: 0px 0px 10px #222;
+    border-radius: 10px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.top-btn-content {
+    font-size: 22px;
+}
+
+.custom-dialog {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #000000ac;
+}
+
+
+.custom-dialog.hidden {
+    display: none;
 }

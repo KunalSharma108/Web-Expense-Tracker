@@ -4,9 +4,21 @@ function Sidebar(props) {
   const [showDialog, setShowDialog] = useState(false);
   const [trackerName, setTrackerName] = useState('');
 
+  const handleOpenDialog = () => {
+    setShowDialog(true);
+  }
+
+  const handleSave = () => {
+    console.log(`Tracker Name : ${trackerName}`)
+  }
+
+  const handleCloseDialog = () => {
+    setShowDialog(false)
+  }
+
   return (
     <div>
-      <div className="sidebar">
+      <div className="sidebar" id='sidebar'>
         <div className="top-btn" onClick={handleOpenDialog}>
           <div className="top-btn-content">New Tracker</div>
         </div>
