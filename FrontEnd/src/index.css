@@ -9,7 +9,7 @@
 :root {
     --border: rgba(70, 70, 70, 0.724);
     --letterSpacing: 1.5px;
-    --mainColor:rgb(25,135,84);
+    --mainColor: rgb(25, 135, 84);
 }
 
 ::selection {
@@ -1023,10 +1023,42 @@ body {
     position: fixed;
     top: 0;
     left: 0;
-    background-color: #000000ac;
+    background-color: #000000a7;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease-in-out;
 }
 
+.custom-dialog.show {
+    opacity: 1;
+    pointer-events: auto;
+}
 
-.custom-dialog.hidden {
-    display: none;
+.custom-dialog.hide {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.dialog-content {
+    padding: 30px;
+    cursor: auto;
+    height: fit-content;
+    width: fit-content;
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: auto auto auto;
+    background-color: #000;
+    box-shadow: 0px 0px 10px var(--mainColor);
+    border-radius: 10px;
+    border:3px solid var(--mainColor);
+    transform: scale(0.8);
+    transition: transform 0.3s ease-in-out;
+}
+
+.custom-dialog.show .dialog-content {
+    transform: scale(1);
+}
+
+.custom-dialog.hide .dialog-content {
+    transform: scale(0.8);
 }
