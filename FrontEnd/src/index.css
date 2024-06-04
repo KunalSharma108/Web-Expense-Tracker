@@ -219,8 +219,8 @@ body {
 .button {
     cursor: pointer;
     color: white;
-    background: var(--mainColor);
-    border: 2px solid var(--mainColor);
+    background:  rgb(66, 155, 66);
+    border: 2px solid  rgb(66, 155, 66);
     padding: 10px 12px;
     font-size: 28px;
     border-radius: 4px;
@@ -231,8 +231,8 @@ body {
 }
 
 .button:hover {
-    background: rgb(66, 155, 66);
-    border: 2px solid rgb(66, 155, 66);
+    background:rgb(55, 144, 55);
+    border: 2px solid rgb(55, 144, 55);
     transition-duration: 0.2s;
 }
 
@@ -1061,4 +1061,66 @@ body {
 
 .custom-dialog.hide .dialog-content {
     transform: scale(0.8);
+}
+
+.dialog-content .dialog-head{
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    font-size:40px;
+    margin-bottom:20px;
+    text-align: center;
+}
+
+.dialog-content .tracker-input {
+    border:3px solid #333;
+    font-size:22px;
+    display: flex;
+    font-family:'Arial Narrow', Arial, sans-serif;
+    letter-spacing: 1px;
+    text-transform: capitalize;
+    justify-content: flex-start;
+    align-items: center;
+    width:300px;
+    height: 50px;
+    padding:4px 4px 4px 10px;
+    border-radius:6px;
+    outline:none;
+    color:rgba(255, 255, 255, 0.595);
+    background-color: #222;
+    box-shadow: 0px 0px 8px #333;
+    transition-duration: 0.3s;
+}
+
+.dialog-content .tracker-input:hover {
+    transition-duration: 0.3s;
+    box-shadow: 0px 0px 25px #333;
+}
+
+.dialog-content .tracker-input:focus {
+    transition-duration: 0.3s;
+    box-shadow: 0px 0px 20px #333;
+    color:white;
+    border:3px solid #666;
+}
+
+.dialog-content .btn-container {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.dialog-content .btn-container .button {
+    border:none;
+    letter-spacing: 0px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size:22px;    
+    padding: 7px 25px;
+    margin-top:20px;
+}
+
+.dialog-content .btn-container .cancel-btn {
+    background-color: rgb(237, 45, 45)
+}
+
+.dialog-content .btn-container .cancel-btn:hover {
+    background-color: rgb(206, 37, 37)
 }

@@ -6,6 +6,7 @@ function Sidebar(props) {
 
   const handleOpenDialog = () => {
     setShowDialog(true);
+    document.getElementById('tracker-input').focus();
   };
 
   const handleSave = () => {
@@ -15,6 +16,14 @@ function Sidebar(props) {
 
   const handleCloseDialog = () => {
     setShowDialog(false);
+    setTrackerName('')
+  };
+
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      handleSave();
+    }
   };
 
   return (
@@ -25,22 +34,25 @@ function Sidebar(props) {
         </div>
       </div>
 
-          <div className={`custom-dialog ${showDialog ? 'show' : 'hide'}`}>
-            <div className="dialog-content">
-              <h2>Tracker Name</h2>
-              <input
-                type="text"
-                value={trackerName}
-                onChange={(e) => setTrackerName(e.target.value)}
-                className="tracker-input"
-              />
-              <div className="btn-container">
-                <button onClick={handleSave} className="save-btn">Save</button>
-                <button onClick={handleCloseDialog} className="cancel-btn">Cancel</button>
-              </div>
-            </div>
+      <div className={`custom-dialog ${showDialog ? 'show' : 'hide'}`}>
+        <div className="dialog-content">
+          <p className='dialog-head'>Tracker Name</p>
+          <input
+            type="text"
+            value={trackerName}
+            onChange={(e) => setTrackerName(e.target.value)}
+            className="tracker-input"
+            id='tracker-input'
+            placeholder='Enter Tracker Name'
+            onKeyDown={handleKeyDown}
+          />
+          <div className="btn-container">
+            <button onClick={handleSave} className="save-btn button">Save</button>
+            <button onClick={handleCloseDialog} className="cancel-btn button">Cancel</button>
           </div>
-          
+        </div>
+      </div>
+
     </div>
   );
 }
