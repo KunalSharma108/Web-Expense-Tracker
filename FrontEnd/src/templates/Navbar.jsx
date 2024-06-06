@@ -3,13 +3,13 @@ import { Link, useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 
 function Navbar(props) {
+    const navigate = useNavigate();
     const handleSignOut = () => {
         try {
             Cookies.remove('displayName');
             Cookies.remove('Email');
-
-            window.alert('You have successfully signed out!');
             window.location.reload();
+            navigate('/')
         } catch (error) {
             console.log(`There was an error : ${error}`)
             window.alert('There was a problem signing out, Try again later!')

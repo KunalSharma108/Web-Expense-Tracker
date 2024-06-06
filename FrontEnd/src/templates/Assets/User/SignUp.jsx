@@ -8,10 +8,11 @@ import {
 } from "react-router-dom";
 
 import { useState } from 'react';
-import { app } from '../Auth/firebase';
+import { app, database } from '../Auth/firebase';
 import { createUserWithEmailAndPassword, updateProfile, getAuth, signInWithEmailAndPassword, signOut } from 'firebase/auth';
 import firebase from 'firebase/compat/app';
 import Cookies from 'js-cookie';
+import { onValue, push, ref, set } from 'firebase/database';
 
 
 function SignUp() {
@@ -36,7 +37,22 @@ function SignUp() {
         passErr: false,
         robotErr: false,
         emailAlreadyInUse: false
-    })
+    });
+
+    const addUser = async (Email) => {
+        const userKey = Email.split('@')[0];
+        const userRef = ref(database, 'Users/' + userKey);
+
+        set(userRef, {Tracker:'yes'})
+            .then(() => {
+                console.log('User node created successfully');
+            })
+            .catch((error) => {
+                console.error('Error creating user node:', error);
+            });
+    };
+
+    addUser('kunalsharma0422@gmail.com')
 
     const handleCheckboxChange = () => {
         setIsChecked(!isChecked);
@@ -101,11 +117,9 @@ function SignUp() {
                             Cookies.set('displayName', userCredentials.user.displayName, { expires: 30 });
                             Cookies.set('Email', userCredentials.user.email, { expires: 30 });
 
-                            // document.cookie = `displayName=${userCredentials.user.displayName}`;
-                            // document.cookie = `Email=${userCredentials.user.email}`;
-
-                            Navigate('/')
-                            window.location.reload();
+                            await addUser(email);
+                            // Navigate('/')
+                            // window.location.reload();
 
                         } catch (error) {
                             console.log(`There was an error : ${error}`)

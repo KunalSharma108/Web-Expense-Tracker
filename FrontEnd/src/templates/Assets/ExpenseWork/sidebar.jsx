@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { database } from '../Auth/firebase';
 
 function Sidebar(props) {
   const [showDialog, setShowDialog] = useState(false);
@@ -30,7 +31,7 @@ function Sidebar(props) {
     <div>
       <div className="sidebar" id="sidebar">
         <div className="top-btn" onClick={handleOpenDialog}>
-          <div className="top-btn-content">New Tracker</div>
+          <div className="top-btn-content">New Tracker +</div>
         </div>
       </div>
 
