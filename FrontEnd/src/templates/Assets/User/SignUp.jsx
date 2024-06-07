@@ -12,7 +12,7 @@ import { app, database } from '../Auth/firebase';
 import { createUserWithEmailAndPassword, updateProfile, getAuth, signInWithEmailAndPassword, signOut } from 'firebase/auth';
 import firebase from 'firebase/compat/app';
 import Cookies from 'js-cookie';
-import { onValue, push, ref, set } from 'firebase/database';
+import { onValue, push, ref, set, update } from 'firebase/database';
 
 
 function SignUp() {
@@ -38,21 +38,6 @@ function SignUp() {
         robotErr: false,
         emailAlreadyInUse: false
     });
-
-    const addUser = async (Email) => {
-        const userKey = Email.split('@')[0];
-        const userRef = ref(database, 'Users/' + userKey);
-
-        set(userRef, {Tracker:'yes'})
-            .then(() => {
-                console.log('User node created successfully');
-            })
-            .catch((error) => {
-                console.error('Error creating user node:', error);
-            });
-    };
-
-    addUser('kunalsharma0422@gmail.com')
 
     const handleCheckboxChange = () => {
         setIsChecked(!isChecked);
@@ -117,9 +102,41 @@ function SignUp() {
                             Cookies.set('displayName', userCredentials.user.displayName, { expires: 30 });
                             Cookies.set('Email', userCredentials.user.email, { expires: 30 });
 
+                            const dummyItems = [
+                                'Books', 'Pencils', 'Chopsticks', 'Notebooks', 'Laptops', 'Water Bottles', 'Sunglasses', 'Headphones',
+                                'Coffee Mugs', 'Keychains', 'Umbrellas', 'Towels', 'Socks', 'T-shirts', 'Hats', 'Scarves', 'Gloves',
+                                'Wallets', 'Backpacks', 'Watches', 'Bracelets', 'Plates', 'Bowls', 'Cups', 'Spoons', 'Forks', 'Knives',
+                                'Toothbrushes', 'Toothpaste', 'Shampoo', 'Conditioner', 'Soap', 'Towels', 'Lotion', 'Sunscreen', 'Facial Cleanser',
+                                'Facial Moisturizer', 'Razors', 'Shaving Cream', 'Deodorant', 'Perfume', 'Cologne', 'Hairbrushes', 'Combs', 'Hair Gel',
+                                'Hair Spray', 'Hair Clips', 'Hair Ties', 'Hairbands', 'Bobby Pins', 'Hair Rollers', 'Hair Dryers', 'Straighteners',
+                                'Curling Irons', 'Mirrors', 'Lip Balm', 'Lipstick', 'Lip Gloss', 'Lip Liner', 'Eyeliner', 'Mascara', 'Eye Shadow',
+                                'Blush', 'Foundation', 'Concealer', 'Makeup Brushes', 'Nail Clippers', 'Nail Files', 'Nail Polish', 'Nail Polish Remover',
+                                'Cotton Balls', 'Cotton Swabs', 'Tweezers', 'Scissors', 'Bandages', 'First Aid Kit', 'Thermometer', 'Pain Relievers',
+                                'Cough Drops', 'Cough Syrup', 'Cold Medicine'
+                            ];
+
+
+                            const addUser = async (Email) => {
+                                const userKey = Email.toLowerCase().split('@')[0];
+                                const userRef = ref(database, 'Users/' + userKey + '/Tracker');
+
+                                try {
+                                    const randomIndex = Math.floor(Math.random() * dummyItems.length);
+                                    const randomItem = dummyItems[randomIndex];
+                                    const randomAmount = Math.floor(Math.random() * 100) + 1;
+
+                                    const expenseData = {
+                                        [randomItem]: randomAmount
+                                    };
+                                    await set(userRef, {Expenses: expenseData, 'icon' : '<i className="fas fa-home"></i>'});
+                                } catch (error) {
+                                    console.error('Error adding random expense:', error);
+                                }
+                            };
+
                             await addUser(email);
-                            // Navigate('/')
-                            // window.location.reload();
+                            Navigate('/');
+                            window.location.reload();
 
                         } catch (error) {
                             console.log(`There was an error : ${error}`)
