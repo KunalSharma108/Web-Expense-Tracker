@@ -115,7 +115,6 @@ function SignUp() {
                                 'Cough Drops', 'Cough Syrup', 'Cold Medicine'
                             ];
 
-
                             const addUser = async (Email) => {
                                 const userKey = Email.toLowerCase().split('@')[0];
                                 const userRef = ref(database, 'Users/' + userKey + '/Tracker');
@@ -128,7 +127,7 @@ function SignUp() {
                                     const expenseData = {
                                         [randomItem]: randomAmount
                                     };
-                                    await set(userRef, {Expenses: expenseData, 'icon' : '<i className="fas fa-home"></i>'});
+                                    await set(userRef, {Expenses: {expenseData, 'icon' : 'className="fas fa-home"'}});
                                 } catch (error) {
                                     console.error('Error adding random expense:', error);
                                 }

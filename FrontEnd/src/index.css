@@ -1134,7 +1134,7 @@ body {
 }
 
 .tracker-list {
-    margin-top:10px;
+    margin-top: 10px;
 }
 
 .tracker:hover {
@@ -1143,68 +1143,80 @@ body {
     cursor: pointer;
 }
 
+.tracker:hover .tracker-options {
+    opacity: 1;
+    transition-duration: .4s;
+}
+
 .tracker {
     transition-duration: 0.4s;
-    padding:10px 0;
+    padding: 10px 0;
+    display: flex;
+    align-items: center;
+    padding-right:20px;
 }
 
 .tracker, .tracker-options {
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: center;
-}
-
-.tracker:hover .tracker-options {
-    transition: opacity .1ms;
     opacity: 1;
 }
 
-.tracker-options {
-    transition: opacity .1ms;
-    opacity: 0;
-    justify-content: space-evenly;
-    width: 100%;
+.tracker-icon {
+    flex: 0 0 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.tracker-options .tracker-edit i {
+.tracker-name {
+    flex: 0 0 45%;
+    font-size: 24px;
+    margin-left: 0px;
+    text-transform: capitalize;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.tracker-options {
+    flex: 0 0 50%;
+    transition-duration: .4s;
+    display: flex;
+    justify-content: space-evenly;
+    opacity: 0;
+    align-items: center;
+    margin-right: 20px;
+}
+
+.tracker-options .tracker-edit i,
+.tracker-options .tracker-delete i {
     transition-duration: 0.2s;
-    font-size:22px;
+    font-size: 22px;
 }
 
 .tracker-options .tracker-edit:hover i {
-    transition-duration: 0.2s;
-    color:#2ed185ce;
-}
-
-.tracker-options .tracker-delete i {
-    transition-duration: 0.2s;
-    font-size:22px;
+    color: #2ed185ce;
 }
 
 .tracker-options .tracker-delete:hover i {
-    color:rgba(235, 76, 64, 0.861);
-    transition-duration: 0.2s;
+    color: rgba(235, 76, 64, 0.861);
 }
 
 .tracker i, .tracker-options i {
-    margin-left:5px;
+    margin-left: 5px;
 }
 
 .tracker-icon {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-left:5px;
+    margin-left: 5px;
 }
 
 .tracker-icon i {
-    font-size:18px;
-    margin-right:10px;
-    color:rgba(255, 255, 255, 0.888);
-}
-
-.tracker-name {
-    font-size:24px;
-    margin-left:-5px;
-    text-transform: capitalize;
+    font-size: 18px;
+    margin-right: 10px;
+    color: rgba(255, 255, 255, 0.888);
 }
