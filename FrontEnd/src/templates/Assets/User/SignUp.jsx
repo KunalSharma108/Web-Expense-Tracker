@@ -127,7 +127,7 @@ function SignUp() {
                                     const expenseData = {
                                         [randomItem]: randomAmount
                                     };
-                                    await set(userRef, {Expenses: {expenseData, 'icon' : 'className="fas fa-home"'}});
+                                    await set(userRef, { Expenses: { expenseData } });
                                 } catch (error) {
                                     console.error('Error adding random expense:', error);
                                 }

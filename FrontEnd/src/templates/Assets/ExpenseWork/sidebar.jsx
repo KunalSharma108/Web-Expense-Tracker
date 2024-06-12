@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { database } from '../Auth/firebase';
-import { ref, set, get } from 'firebase/database';
+import { ref, update, get, remove, set } from 'firebase/database';
 import Cookies from 'js-cookie';
 
 function Sidebar(props) {
@@ -27,10 +27,12 @@ function Sidebar(props) {
     (<i className="fas fa-plane"></i>)
   ];
 
-
+  const [trackerState, setTrackerstate] = useState('');
   const [showDialog, setShowDialog] = useState(false);
   const [trackerName, setTrackerName] = useState('');
   const [trackers, setTrackers] = useState([]);
+  const [selectedTracker, setSelectedTracker] = useState('');
+
   const maxCharLimit = 10;
 
   useEffect(() => {
@@ -55,7 +57,6 @@ function Sidebar(props) {
         const trackersArray = Object.keys(data).map(trackerName => ({
           name: trackerName,
           expenseData: data[trackerName].expenseData,
-          icon: data[trackerName].icon
         }));
         setTrackers(trackersArray);
       } else {
@@ -65,8 +66,6 @@ function Sidebar(props) {
       console.error('Error fetching trackers:', error);
     }
   };
-
-  console.log(trackers)
 
   const saveTracker = async (trackerName) => {
     try {
@@ -97,7 +96,7 @@ function Sidebar(props) {
           [randomItem]: randomAmount
         };
 
-        let newTracker = { expenseData, icon: `${iconArray[(Math.floor(Math.random() * iconArray.length))]}` };
+        let newTracker = { expenseData };
 
         await set(userRef, newTracker);
 
@@ -112,22 +111,86 @@ function Sidebar(props) {
     }
   };
 
-  const handleOpenDialog = () => {
+  const handleAddOpenDialog = () => {
+    setTrackerstate('Add Tracker');
     setShowDialog(true);
     setTimeout(() => {
       document.getElementById('tracker-input').focus();
     }, 0);
   };
 
+  const handleEditOpenDialog = (trackerName) => {
+    setSelectedTracker(trackerName);
+    setTrackerstate('Edit Tracker');
+    setShowDialog(true);
+
+    setTimeout(() => {
+      document.getElementById('tracker-input').focus();
+    }, 0);
+  }
+
+  const deleteTracker = (trackerName) => {
+    const confirmDelete = window.confirm(`Are you sure you want to delete the tracker "${trackerName}"?`);
+
+    if (confirmDelete) {
+      try {
+        const userId = getUserIdFromEmail();
+        if (!userId) throw new Error('User ID not found');
+
+        const trackerRef = ref(database, `Users/${userId}/Tracker/${trackerName}`);
+        remove(trackerRef)
+          .catch(error => console.error('Error deleting tracker:', error));
+
+        setTrackers(prevTrackers => prevTrackers.filter(tracker => tracker.name !== trackerName));
+
+      } catch (error) {
+        console.error('Error deleting tracker:', error);
+      }
+    }
+  };
+
+
+  const editTracker = async () => {
+    try {
+      const userId = getUserIdFromEmail();
+      if (!userId) throw new Error('User ID not found');
+
+      const updates = {};
+
+      updates[`Users/${userId}/Tracker/${trackerName}`] = await get(ref(database, `Users/${userId}/Tracker/${selectedTracker}`))
+        .then(snapshot => snapshot.val());
+
+      updates[`Users/${userId}/Tracker/${selectedTracker}`] = null;
+      await update(ref(database), updates);
+
+      setTrackers(prevTrackers =>
+        prevTrackers.map(tracker =>
+          tracker.name === selectedTracker ? { ...tracker, name: trackerName } : tracker
+        )
+      );
+
+    } catch (error) {
+      console.error('Error updating tracker:', error);
+    }
+  };
+
   const handleSave = () => {
-    console.log(`Tracker Name : ${trackerName}`);
-    saveTracker(trackerName);
+    if (trackerState.trim() === 'Add Tracker') {
+      saveTracker(trackerName);
+    } else if (trackerState.trim() === 'Edit Tracker') {
+      editTracker();
+    } else {
+      window.alert('An error occurred, need to refresh the web page.');
+      window.location.reload();
+    }
     handleCloseDialog();
   };
 
   const handleCloseDialog = () => {
     setShowDialog(false);
     setTrackerName('');
+    setTrackerstate('');
+    setSelectedTracker('');
   };
 
   const handleKeyDown = (event) => {
@@ -140,50 +203,47 @@ function Sidebar(props) {
   return (
     <div>
       <div className="sidebar" id="sidebar">
-        <div className="top-btn" onClick={handleOpenDialog}>
+        <div className="top-btn" onClick={handleAddOpenDialog}>
           <div className="top-btn-content">New Tracker +</div>
         </div>
 
         <div className="bottom-div">
           <div className="tracker-list">
-
             {trackers.map((tracker) => (
               <div key={tracker.name} className="tracker">
                 <div className="tracker-icon">
-                  {iconArray[(Math.floor(Math.random() * iconArray.length))]}
+                  {iconArray[Math.floor(Math.random() * iconArray.length)]}
                 </div>
                 <div className="tracker-name">
                   {tracker.name}
                 </div>
                 <div className="tracker-options">
-                  <div className="tracker-edit" title='Edit'>
-                    <i className="fa-regular fa-pen-to-square" title='Edit'></i>
+                  <div className="tracker-edit" title="Edit" onClick={() => handleEditOpenDialog(tracker.name)}>
+                    <i className="fa-regular fa-pen-to-square" title="Edit"></i>
                   </div>
-                  <div className="tracker-delete" title='Delete'>
-                    <i className="fa-solid fa-trash" title='Delete'></i>
+                  <div className="tracker-delete" title="Delete">
+                    <i className="fa-solid fa-trash" title="Delete" onClick={() => deleteTracker(tracker.name)}></i>
                   </div>
                 </div>
               </div>
             ))}
-
           </div>
         </div>
       </div>
 
       <div className={`custom-dialog ${showDialog ? 'show' : 'hide'}`}>
         <div className="dialog-content">
-          <p className='dialog-head'>Tracker Name</p>
+          <p className="dialog-head">{trackerState}</p>
           <input
             type="text"
             value={trackerName}
             onChange={(e) => setTrackerName(e.target.value.replace(/\s/g, ''))}
             className="tracker-input"
-            id='tracker-input'
-            placeholder='Enter Tracker Name'
+            id="tracker-input"
+            placeholder="Enter Tracker Name"
             onKeyDown={handleKeyDown}
             maxLength={maxCharLimit}
           />
-
           <div className="char-limit">
             {trackerName.length}/{maxCharLimit}
           </div>
@@ -193,7 +253,6 @@ function Sidebar(props) {
           </div>
         </div>
       </div>
-
     </div>
   );
 }
