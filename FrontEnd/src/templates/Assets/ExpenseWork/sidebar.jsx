@@ -2,8 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { database } from '../Auth/firebase';
 import { ref, update, get, remove, set } from 'firebase/database';
 import Cookies from 'js-cookie';
+import { useNavigate } from 'react-router-dom';
 
-function Sidebar(props) {
+const Sidebar = ({ onSelect }) => {
+  const navigate = useNavigate();
   const iconArray = [
     (<i className="fas fa-calendar-minus"></i>),
     (<i className="fas fa-money-bill-trend-up"></i>),
@@ -47,7 +49,14 @@ function Sidebar(props) {
   const fetchTrackers = async () => {
     try {
       const userId = getUserIdFromEmail();
-      if (!userId) throw new Error('User ID not found');
+      if (!userId) {
+        window.alert('There was a problem with your Email, Need to sign out urgently.');
+        Cookies.remove('displayName');
+        Cookies.remove('Email');
+        navigate('/');
+        window.location.reload();
+        return;
+      }
 
       const userRef = ref(database, `Users/${userId}/Tracker`);
       const snapshot = await get(userRef);
@@ -83,7 +92,14 @@ function Sidebar(props) {
       ];
 
       const userId = getUserIdFromEmail();
-      if (!userId) throw new Error('User ID not found');
+      if (!userId) {
+        window.alert('There was a problem with your Email, Need to sign out urgently.');
+        Cookies.remove('displayName');
+        Cookies.remove('Email');
+        navigate('/');
+        window.location.reload();
+        return;
+      }
 
       const userRef = ref(database, `Users/${userId}/Tracker/${trackerName}`);
 
@@ -130,12 +146,19 @@ function Sidebar(props) {
   }
 
   const deleteTracker = (trackerName) => {
-    const confirmDelete = window.confirm(`Are you sure you want to delete the tracker "${trackerName}"?`);
+    const confirmDelete = window.confirm(`Are you sure you want to delete the tracker : "${trackerName}"?`);
 
     if (confirmDelete) {
       try {
         const userId = getUserIdFromEmail();
-        if (!userId) throw new Error('User ID not found');
+        if (!userId) {
+          window.alert('There was a problem with your Email, Need to sign out urgently.');
+          Cookies.remove('displayName');
+          Cookies.remove('Email');
+          navigate('/');
+          window.location.reload();
+          return;
+        }
 
         const trackerRef = ref(database, `Users/${userId}/Tracker/${trackerName}`);
         remove(trackerRef)
@@ -143,17 +166,27 @@ function Sidebar(props) {
 
         setTrackers(prevTrackers => prevTrackers.filter(tracker => tracker.name !== trackerName));
 
+        if (onSelect) {
+          onSelect(null);
+        }
+
       } catch (error) {
         console.error('Error deleting tracker:', error);
       }
     }
   };
 
-
   const editTracker = async () => {
     try {
       const userId = getUserIdFromEmail();
-      if (!userId) throw new Error('User ID not found');
+      if (!userId) {
+        window.alert('There was a problem with your Email, Need to sign out urgently.');
+        Cookies.remove('displayName');
+        Cookies.remove('Email');
+        navigate('/');
+        window.location.reload();
+        return;
+      }
 
       const updates = {};
 
@@ -168,6 +201,10 @@ function Sidebar(props) {
           tracker.name === selectedTracker ? { ...tracker, name: trackerName } : tracker
         )
       );
+
+      if (onSelect) {
+        onSelect(null);
+      }
 
     } catch (error) {
       console.error('Error updating tracker:', error);
@@ -200,6 +237,12 @@ function Sidebar(props) {
     }
   };
 
+  const handleDivClick = (content) => {
+    if (onSelect) {
+      onSelect(content);
+    }
+  };
+
   return (
     <div>
       <div className="sidebar" id="sidebar">
@@ -209,8 +252,13 @@ function Sidebar(props) {
 
         <div className="bottom-div">
           <div className="tracker-list">
+
             {trackers.map((tracker) => (
-              <div key={tracker.name} className="tracker">
+              <div
+                key={tracker.name}
+                className="tracker"
+                onClick={() => handleDivClick(tracker.name)}
+              >
                 <div className="tracker-icon">
                   {iconArray[Math.floor(Math.random() * iconArray.length)]}
                 </div>
@@ -218,15 +266,22 @@ function Sidebar(props) {
                   {tracker.name}
                 </div>
                 <div className="tracker-options">
-                  <div className="tracker-edit" title="Edit" onClick={() => handleEditOpenDialog(tracker.name)}>
+                  <div className="tracker-edit" title="Edit" onClick={(e) => {
+                    e.stopPropagation();
+                    handleEditOpenDialog(tracker.name);
+                  }}>
                     <i className="fa-regular fa-pen-to-square" title="Edit"></i>
                   </div>
-                  <div className="tracker-delete" title="Delete">
-                    <i className="fa-solid fa-trash" title="Delete" onClick={() => deleteTracker(tracker.name)}></i>
+                  <div className="tracker-delete" title="Delete" onClick={(e) => {
+                    e.stopPropagation();
+                    deleteTracker(tracker.name);
+                  }}>
+                    <i className="fa-solid fa-trash" title="Delete"></i>
                   </div>
                 </div>
               </div>
             ))}
+
           </div>
         </div>
       </div>
