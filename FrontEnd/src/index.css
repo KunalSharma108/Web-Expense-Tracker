@@ -1244,13 +1244,12 @@ body {
     float: right;
 }
 
-.expense-main .loading +
-.expense-main {
+.expense-main .loading+.expense-main {
     background-color: rgba(0, 0, 0, 0.5);
 }
 
 .loading-parent {
-    width: inherit;
+    width: 100%;
     height: inherit;
     display: flex;
     justify-content: center;
@@ -1291,9 +1290,24 @@ body {
 }
 
 .expense-not-loaded-content {
-    font-size:40px;
-    color:rgba(0, 0, 0, 0.884);
+    font-size: 40px;
+    color: rgba(0, 0, 0, 0.884);
     font-weight: 800;
     text-transform: uppercase;
     font-family: sans-serif;
+}
+
+.expense-main-div {
+    height: inherit;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.expense-header {
+    font-size: 50px;
+    padding-top: 20px;
+    text-align: center;
+    text-transform: capitalize;
 }

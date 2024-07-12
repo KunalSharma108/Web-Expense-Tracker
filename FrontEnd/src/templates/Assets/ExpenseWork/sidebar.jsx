@@ -6,27 +6,28 @@ import { useNavigate } from 'react-router-dom';
 
 const Sidebar = ({ onSelect }) => {
   const navigate = useNavigate();
+
   const iconArray = [
-    (<i className="fas fa-calendar-minus"></i>),
-    (<i className="fas fa-money-bill-trend-up"></i>),
-    (<i className="fas fa-coins"></i>),
-    (<i className="fas fa-hand-holding-usd"></i>),
-    (<i className="fas fa-piggy-bank"></i>),
-    (<i className="fas fa-wallet"></i>),
-    (<i className="fas fa-credit-card"></i>),
-    (<i className="fas fa-money-check"></i>),
-    (<i className="fas fa-dollar-sign"></i>),
-    (<i className="fas fa-chart-line"></i>),
-    (<i className="fas fa-chart-pie"></i>),
-    (<i className="fas fa-money-check-alt"></i>),
-    (<i className="fas fa-receipt"></i>),
-    (<i className="fas fa-shopping-cart"></i>),
-    (<i className="fas fa-coffee"></i>),
-    (<i className="fas fa-utensils"></i>),
-    (<i className="fas fa-car"></i>),
-    (<i className="fas fa-gas-pump"></i>),
-    (<i className="fas fa-home"></i>),
-    (<i className="fas fa-plane"></i>)
+    "fa-calendar-minus",
+    "fa-money-bill-trend-up",
+    "fa-coins",
+    "fa-hand-holding-usd",
+    "fa-piggy-bank",
+    "fa-wallet",
+    "fa-credit-card",
+    "fa-money-check",
+    "fa-dollar-sign",
+    "fa-chart-line",
+    "fa-chart-pie",
+    "fa-money-check-alt",
+    "fa-receipt",
+    "fa-shopping-cart",
+    "fa-coffee",
+    "fa-utensils",
+    "fa-car",
+    "fa-gas-pump",
+    "fa-home",
+    "fa-plane"
   ];
 
   const [trackerState, setTrackerstate] = useState('');
@@ -66,6 +67,7 @@ const Sidebar = ({ onSelect }) => {
         const trackersArray = Object.keys(data).map(trackerName => ({
           name: trackerName,
           expenseData: data[trackerName].expenseData,
+          icon: data[trackerName].icon
         }));
         setTrackers(trackersArray);
       } else {
@@ -104,15 +106,45 @@ const Sidebar = ({ onSelect }) => {
       const userRef = ref(database, `Users/${userId}/Tracker/${trackerName}`);
 
       try {
-        const randomIndex = Math.floor(Math.random() * dummyItems.length);
-        const randomItem = dummyItems[randomIndex];
-        const randomAmount = Math.floor(Math.random() * 100) + 1;
+        const expenseData = [
+          {
+            Item: dummyItems[Math.floor(Math.random() * dummyItems.length)],
+            Amount: Math.floor(Math.random() * 100) + 1,
+            Price: Math.floor(Math.random() * 100) + 1
+          },
+          {
+            Item: dummyItems[Math.floor(Math.random() * dummyItems.length)],
+            Amount: Math.floor(Math.random() * 100) + 1,
+            Price: Math.floor(Math.random() * 100) + 1
+          },
+          {
+            Item: dummyItems[Math.floor(Math.random() * dummyItems.length)],
+            Amount: Math.floor(Math.random() * 100) + 1,
+            Price: Math.floor(Math.random() * 100) + 1
+          },
+          {
+            Item: dummyItems[Math.floor(Math.random() * dummyItems.length)],
+            Amount: Math.floor(Math.random() * 100) + 1,
+            Price: Math.floor(Math.random() * 100) + 1
+          },
+          {
+            Item: dummyItems[Math.floor(Math.random() * dummyItems.length)],
+            Amount: Math.floor(Math.random() * 100) + 1,
+            Price: Math.floor(Math.random() * 100) + 1
+          },
+          {
+            Item: dummyItems[Math.floor(Math.random() * dummyItems.length)],
+            Amount: Math.floor(Math.random() * 100) + 1,
+            Price: Math.floor(Math.random() * 100) + 1
+          },
+          {
+            Item: dummyItems[Math.floor(Math.random() * dummyItems.length)],
+            Amount: Math.floor(Math.random() * 100) + 1,
+            Price: Math.floor(Math.random() * 100) + 1
+          },
+        ];
 
-        const expenseData = {
-          [randomItem]: randomAmount
-        };
-
-        let newTracker = { expenseData };
+        let newTracker = { expenseData, icon: iconArray[Math.floor(Math.random() * iconArray.length)] };
 
         await set(userRef, newTracker);
 
@@ -260,7 +292,7 @@ const Sidebar = ({ onSelect }) => {
                 onClick={() => handleDivClick(tracker.name)}
               >
                 <div className="tracker-icon">
-                  {iconArray[Math.floor(Math.random() * iconArray.length)]}
+                  <i className={`fas ${tracker.icon}`}></i>
                 </div>
                 <div className="tracker-name">
                   {tracker.name}

@@ -6,13 +6,10 @@ function ExpenseWork(props) {
   const [currentTracker, setCurrentTracker] = useState(null);
 
   const handleSelect = (tracker) => {
-    console.log("Tracker selected:", tracker);
     setCurrentTracker(tracker);
-    console.log(`this is right below : ${currentTracker}`)
   };
 
   useEffect(() => {
-    console.log("Current Tracker Updated:", currentTracker);
   }, [currentTracker]);
 
   return (

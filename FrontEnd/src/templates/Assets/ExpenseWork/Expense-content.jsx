@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 
 function ExpenseContent({ currentTracker }) {
   const navigate = useNavigate();
-  const [selectedTrackerData, setSelectedTrackerData] = useState(null);
+  const [selectedTrackerData, setSelectedTrackerData] = useState([]);
   const [loading, setLoading] = useState(false);
 
   const getUserIdFromEmail = () => {
@@ -24,7 +24,7 @@ function ExpenseContent({ currentTracker }) {
   useEffect(() => {
     const fetchData = async () => {
       if (currentTracker) {
-        setLoading(true); // Show loading screen
+        setLoading(true);
         let Email = getUserIdFromEmail();
         if (!Email) {
           window.alert('There was a problem with your Email, Need to sign out urgently.');
@@ -39,14 +39,13 @@ function ExpenseContent({ currentTracker }) {
           const snapshot = await get(ref(database, `Users/${Email}/Tracker/${currentTracker}/expenseData`));
           const data = snapshot.val();
 
-          // Simulate loading for at least 0.5 seconds
           await new Promise(resolve => setTimeout(resolve, 500));
 
           setSelectedTrackerData(data);
         } catch (error) {
           console.error('Error fetching data:', error);
         } finally {
-          setLoading(false); // Hide loading screen
+          setLoading(false);
         }
       } else {
         setSelectedTrackerData(null);
@@ -55,6 +54,8 @@ function ExpenseContent({ currentTracker }) {
 
     fetchData();
   }, [currentTracker, navigate]);
+
+  console.log(selectedTrackerData)
 
   return (
     <div className='expense-main'>
@@ -67,14 +68,40 @@ function ExpenseContent({ currentTracker }) {
       {!loading && selectedTrackerData != null && (
 
         <div className='expense-main-div'>
-          <div className="expense-header">
-            <div className="expense-header-name">
-              {currentTracker}
+          <div className="expense-content">
+            <div className="toolbar">
+              <div>{currentTracker}</div>
+              <div>
+                <button>+</button>
+              </div>
             </div>
-            {JSON.stringify(selectedTrackerData)}
+            <div className="table-wrapper">
+              <table className="expense-table">
+                <thead>
+                  <tr>
+                    <th>Serial No.</th>
+                    <th>Name</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Total Price</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {selectedTrackerData.map((item, index) => (
+                    <tr key={index}>
+                      <td>{index + 1}</td>
+                      <td>{item.Item}</td>
+                      <td>{item.Amount}</td>
+                      <td>{item.Price}</td>
+                      <td>{item.Amount * item.Price}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
-        
+
       )}
       {!loading && selectedTrackerData == null && (
         <div className='loading-parent'>
