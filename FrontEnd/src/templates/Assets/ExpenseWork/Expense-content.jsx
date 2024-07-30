@@ -55,7 +55,13 @@ function ExpenseContent({ currentTracker }) {
     fetchData();
   }, [currentTracker, navigate]);
 
-  console.log(selectedTrackerData)
+  const deleteTracker = () => {
+    window.alert('Delete button clicked')
+  }
+  
+  const handleEditOpenDialog = () => {
+    window.alert('Edit button clicked')
+  }
 
   return (
     <div className='expense-main'>
@@ -69,13 +75,14 @@ function ExpenseContent({ currentTracker }) {
 
         <div className='expense-main-div'>
           <div className="expense-content">
-            <div className="toolbar">
-              <div>{currentTracker}</div>
-              <div>
-                <button>+</button>
-              </div>
-            </div>
             <div className="table-wrapper">
+              <div className="toolbar">
+                <div className='Tname'>{currentTracker}</div>
+                <div className='Ttools'>
+                  <div className="tool">Add Row</div>
+                  <div className="tool">Delete</div>
+                </div>
+              </div>
               <table className="expense-table">
                 <thead>
                   <tr>
@@ -83,7 +90,9 @@ function ExpenseContent({ currentTracker }) {
                     <th>Name</th>
                     <th>Quantity</th>
                     <th>Price</th>
-                    <th>Total Price</th>
+                    <th>Total</th>
+                    <th></th>
+                    <th></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -94,6 +103,22 @@ function ExpenseContent({ currentTracker }) {
                       <td>{item.Amount}</td>
                       <td>{item.Price}</td>
                       <td>{item.Amount * item.Price}</td>
+                      <td>
+                        <div className="tracker-edit" title="Edit" onClick={(e) => {
+                          e.stopPropagation();
+                          handleEditOpenDialog();
+                        }}>
+                          <i className="fa-regular fa-pen-to-square" title="Edit"></i>
+                        </div>
+                      </td>
+                      <td>
+                        <div className="tracker-delete" title="Delete" onClick={(e) => {
+                          e.stopPropagation();
+                          deleteTracker();
+                        }}>
+                          <i className="fa-solid fa-trash" title="Delete"></i>
+                        </div>
+                      </td>
                     </tr>
                   ))}
                 </tbody>

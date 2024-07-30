@@ -1302,12 +1302,89 @@ body {
     width: 100%;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
 }
 
-.expense-header {
-    font-size: 50px;
-    padding-top: 20px;
-    text-align: center;
+.expense-content {
+    width: 100%;
+    display: grid;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 7%;
+}
+
+.table-wrapper {
+    width: fit-content;
+    border: 6px solid white;
+    border-radius: 8px;
+    box-shadow: 0px 0px 20px #001;
+}
+
+.toolbar {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    padding: 15px 10px;
+    border-bottom: 2px solid white;
+    background-color: rgb(240, 44, 44);
+}
+
+.toolbar .Tname {
+    justify-self: start;
+    font-size: 30px;
     text-transform: capitalize;
+}
+
+.toolbar .Ttools {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    justify-self: end;
+    padding: 10px 15px;
+    background: var(--mainColor);
+    color: white;
+    cursor: pointer;
+    box-shadow: 0px 0px 10px #0000007e;
+    border-radius: 6px;
+}
+
+.expense-table thead {
+    border-bottom: 2px solid white
+}
+
+.expense-table .tracker-delete,
+.expense-table .tracker-edit {
+    cursor: pointer;
+}
+
+.expense-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 1em;
+    font-family: Arial, sans-serif;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.expense-table thead tr {
+    background-color: #009879;
+    color: #ffffff;
+    text-align: left;
+}
+
+.expense-table th,
+.expense-table td {
+    padding: 12px 15px;
+}
+
+.expense-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.expense-table tbody tr:last-of-type {
+    border-bottom: 2px solid #009879;
+}
+
+.expense-table tbody tr:hover {
+    background-color: #323232;
 }
