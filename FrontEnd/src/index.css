@@ -1303,21 +1303,30 @@ body {
     display: flex;
     justify-content: center;
     align-items: flex-start;
+    overflow: auto;
+    scrollbar-width: 0;
+    padding-top: 4%;
+}
+
+.expense-main-div::-webkit-scrollbar {
+    width: 0;
+    background-color: transparent;
 }
 
 .expense-content {
-    width: 100%;
+    width: 70%;
     display: grid;
     justify-content: center;
-    align-items: flex-start;
-    padding-top: 7%;
+    align-items: center;
 }
 
 .table-wrapper {
-    width: fit-content;
+    max-width: 100%;
     border: 6px solid white;
     border-radius: 8px;
     box-shadow: 0px 0px 20px #001;
+    margin-bottom: 10px;
+    overflow: hidden;
 }
 
 .toolbar {
@@ -1337,19 +1346,49 @@ body {
 
 .toolbar .Ttools {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    justify-self: end;
     padding: 10px 15px;
-    background: var(--mainColor);
     color: white;
     cursor: pointer;
-    box-shadow: 0px 0px 10px #0000007e;
     border-radius: 6px;
+    width: fit-content;
+    background-color: #57aeae;
+    transition-duration: 0.5s;
+    box-shadow: 0px 0px 10px #0000006f;
+}
+
+.toolbar .Ttools:hover {
+    background-color: #47c3c3;
+    transition-duration: 0.5s;
+}
+
+.toolbar .Ttools .tool {
+    margin: 0 10px;
+    transform: scale(1.5, 1.5);
+    background: transparent;
+}
+
+.toolbar .Ttools .plus-tool {
+    transform: scale(2.5, 2.5);
+    border-radius: 30px;
+    background: transparent;
+}
+
+.expense-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 18px;
+    font-family: Arial, sans-serif;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    table-layout: fixed;
 }
 
 .expense-table thead {
-    border-bottom: 2px solid white
+    border-bottom: 2px solid white;
+    display: table-header-group;
+    text-align: left;
 }
 
 .expense-table .tracker-delete,
@@ -1357,28 +1396,31 @@ body {
     cursor: pointer;
 }
 
-.expense-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 1em;
-    font-family: Arial, sans-serif;
-    min-width: 400px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-}
-
 .expense-table thead tr {
     background-color: #009879;
     color: #ffffff;
     text-align: left;
+    display: table;
+    width: 100%;
+    table-layout: fixed;
 }
 
 .expense-table th,
 .expense-table td {
-    padding: 12px 15px;
+    padding: 12px 10px;
+}
+
+.expense-table tbody {
+    display: block;
+    max-height: 350px;
+    overflow-y: scroll;
 }
 
 .expense-table tbody tr {
     border-bottom: 1px solid #dddddd;
+    display: table;
+    width: 100%;
+    table-layout: fixed;
 }
 
 .expense-table tbody tr:last-of-type {
@@ -1387,4 +1429,63 @@ body {
 
 .expense-table tbody tr:hover {
     background-color: #323232;
+}
+
+.expense-table .tracker-edit i {
+    transform: scale(1.2, 1.2);
+    opacity: 0;
+}
+
+.expense-table .tracker-delete i {
+    transform: scale(1.2, 1.2);
+    opacity: 0;
+}
+
+.expense-table .tracker-edit:hover i {
+    color: #2ed185ce;
+}
+
+.expense-table .tracker-delete:hover i {
+    color: rgba(235, 76, 64, 0.861);
+}
+
+.expense-table tbody tr:hover .tracker-edit i,
+.expense-table tbody tr:hover .tracker-delete i {
+    opacity: 1;
+    transition-duration: 0ms;
+}
+
+.expense-table tbody {
+    height: inherit;
+    overflow: auto;
+}
+
+.expense-table tbody::-webkit-scrollbar {
+    width: 0;
+    background-color: transparent;
+}
+
+.col-serial {
+    width: 15%;
+}
+
+.col-name {
+    width: 30%;
+}
+
+.col-quantity {
+    width: 12%;
+}
+
+.col-price {
+    width: 12%;
+}
+
+.col-total {
+    width: 12%;
+}
+
+.col-edit,
+.col-delete {
+    width: 8%;
 }

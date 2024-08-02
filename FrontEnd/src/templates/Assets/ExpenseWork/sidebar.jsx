@@ -142,6 +142,41 @@ const Sidebar = ({ onSelect }) => {
             Amount: Math.floor(Math.random() * 100) + 1,
             Price: Math.floor(Math.random() * 100) + 1
           },
+          {
+            Item: dummyItems[Math.floor(Math.random() * dummyItems.length)],
+            Amount: Math.floor(Math.random() * 100) + 1,
+            Price: Math.floor(Math.random() * 100) + 1
+          },
+          {
+            Item: dummyItems[Math.floor(Math.random() * dummyItems.length)],
+            Amount: Math.floor(Math.random() * 100) + 1,
+            Price: Math.floor(Math.random() * 100) + 1
+          },
+          {
+            Item: dummyItems[Math.floor(Math.random() * dummyItems.length)],
+            Amount: Math.floor(Math.random() * 100) + 1,
+            Price: Math.floor(Math.random() * 100) + 1
+          },
+          {
+            Item: dummyItems[Math.floor(Math.random() * dummyItems.length)],
+            Amount: Math.floor(Math.random() * 100) + 1,
+            Price: Math.floor(Math.random() * 100) + 1
+          },
+          {
+            Item: dummyItems[Math.floor(Math.random() * dummyItems.length)],
+            Amount: Math.floor(Math.random() * 100) + 1,
+            Price: Math.floor(Math.random() * 100) + 1
+          },
+          {
+            Item: dummyItems[Math.floor(Math.random() * dummyItems.length)],
+            Amount: Math.floor(Math.random() * 100) + 1,
+            Price: Math.floor(Math.random() * 100) + 1
+          },
+          {
+            Item: dummyItems[Math.floor(Math.random() * dummyItems.length)],
+            Amount: Math.floor(Math.random() * 100) + 1,
+            Price: Math.floor(Math.random() * 100) + 1
+          },
         ];
 
         let newTracker = { expenseData, icon: iconArray[Math.floor(Math.random() * iconArray.length)] };
