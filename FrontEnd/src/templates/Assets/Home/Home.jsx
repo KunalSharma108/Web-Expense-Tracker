@@ -14,7 +14,7 @@ function Home(props) {
       <About />
       <WhyWET />
       <KeyFeatures />
-      <GetStarted Data={props.Data}/>
+      <GetStarted Data={props.Data} />
       <TechUsed />
     </div>
   )
