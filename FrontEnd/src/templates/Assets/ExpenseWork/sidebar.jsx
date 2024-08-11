@@ -108,13 +108,13 @@ const Sidebar = ({ onSelect }) => {
       try {
         const expenseData = [
           {
-            Item: dummyItems[Math.floor(Math.random() * dummyItems.length)],
-            Amount: Math.floor(Math.random() * 100) + 1,
+            Name: dummyItems[Math.floor(Math.random() * dummyItems.length)],
+            Quantity: Math.floor(Math.random() * 100) + 1,
             Price: Math.floor(Math.random() * 100) + 1
           },
           {
-            Item: dummyItems[Math.floor(Math.random() * dummyItems.length)],
-            Amount: Math.floor(Math.random() * 100) + 1,
+            Name: dummyItems[Math.floor(Math.random() * dummyItems.length)],
+            Quantity: Math.floor(Math.random() * 100) + 1,
             Price: Math.floor(Math.random() * 100) + 1
           },
         ];
@@ -135,6 +135,9 @@ const Sidebar = ({ onSelect }) => {
   };
 
   const handleAddOpenDialog = () => {
+    if (onSelect) {
+      onSelect(null);
+    }
     setTrackerstate('Add Tracker');
     setShowDialog(true);
     setTimeout(() => {
@@ -201,6 +204,7 @@ const Sidebar = ({ onSelect }) => {
         .then(snapshot => snapshot.val());
 
       updates[`Users/${userId}/Tracker/${selectedTracker}`] = null;
+      console.log(updates)
       await update(ref(database), updates);
 
       setTrackers(prevTrackers =>
@@ -220,6 +224,10 @@ const Sidebar = ({ onSelect }) => {
 
   const handleSave = () => {
     if (trackerState.trim() === 'Add Tracker') {
+      if (trackerName.trim() === '') {
+        window.alert('Name Can\'t be empty.')
+        return
+      }      
       saveTracker(trackerName);
     } else if (trackerState.trim() === 'Edit Tracker') {
       editTracker();

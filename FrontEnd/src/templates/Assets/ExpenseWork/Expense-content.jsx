@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { database } from '../Auth/firebase';
-import { ref, get } from 'firebase/database';
+import { ref, get, update } from 'firebase/database';
 import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router-dom';
 
@@ -10,6 +10,9 @@ function ExpenseContent({ currentTracker }) {
   const [selectedTrackerData, setSelectedTrackerData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [dialogState, setDialogState] = useState('');
+  const [rowName, setRowName] = useState('');
+  const [rowQuantity, setRowQuantity] = useState('');
+  const [rowPrice, setRowPrice] = useState('');
 
   const getUserIdFromEmail = () => {
     const email = Cookies.get('Email');
@@ -50,6 +53,7 @@ function ExpenseContent({ currentTracker }) {
           await new Promise((resolve) => setTimeout(resolve, 500));
 
           setSelectedTrackerData(data);
+
         } catch (error) {
           console.error('Error fetching data:', error);
         } finally {
@@ -63,17 +67,78 @@ function ExpenseContent({ currentTracker }) {
     fetchData();
   }, [currentTracker, navigate]);
 
+
   const deleteTracker = () => {
     window.alert('Delete button clicked');
   };
 
   const handleEditOpenDialog = () => {
     setDialogState('edit')
-    window.alert('Edit button clicked');
   };
 
-  const addRow  = () => {
+  const handleAddOpenDialog = () => {
     setDialogState('add')
+  }
+
+  const editRow = () => {
+
+  }
+
+  const addRow = async () => {
+    let newRow = {
+      Name: rowName,
+      Quantity: rowQuantity,
+      Price: rowPrice,
+    };
+
+    let Email = getUserIdFromEmail();
+    if (!Email) {
+      window.alert('There was a problem with your Email, need to sign out urgently.');
+      Cookies.remove('displayName');
+      Cookies.remove('Email');
+      window.location.reload();
+      navigate('/');
+      return;
+    }
+
+    let newValue = [...selectedTrackerData, newRow];
+
+    const updatedRow = {};
+    updatedRow[`Users/${Email}/Tracker/${currentTracker}/expenseData`] = newValue;
+
+    try {
+      await update(ref(database), updatedRow);
+      setSelectedTrackerData(newValue);
+
+      setRowName('')
+      setRowQuantity('')
+      setRowPrice('')
+
+    } catch (error) {
+      window.alert('Failed to add row. Please try again.');
+    }
+  };
+
+
+  const handleCloseDialog = () => {
+    setDialogState('')
+  }
+
+  const handleSave = () => {
+    if (rowName.trim() == '' || rowQuantity.trim() == '' || rowPrice.trim() == '') {
+      window.alert("No Value can be empty.")
+      return;
+    }
+
+    if (dialogState == 'add') {
+      addRow();
+    } else if (dialogState == 'edit') {
+      editRow();
+    } else {
+      window.alert('An error occured')
+      window.location.reload();
+    }
+    setDialogState('')
   }
 
   return (
@@ -89,7 +154,7 @@ function ExpenseContent({ currentTracker }) {
             <div className="table-wrapper">
               <div className="toolbar">
                 <div className="Tname">{currentTracker}</div>
-                <div className="Ttools" onClick={addRow}>
+                <div className="Ttools" onClick={handleAddOpenDialog}>
                   <div className="tool plus-tool" title="Add Row">
                     +
                   </div>
@@ -111,10 +176,10 @@ function ExpenseContent({ currentTracker }) {
                   {selectedTrackerData.map((item, index) => (
                     <tr key={index}>
                       <td className="col-serial">{index + 1}</td>
-                      <td className="col-name">{item.Item}</td>
-                      <td className="col-quantity">{item.Amount}</td>
+                      <td className="col-name">{item.Name}</td>
+                      <td className="col-quantity">{item.Quantity}</td>
                       <td className="col-price">{item.Price}</td>
-                      <td className="col-total">{item.Amount * item.Price}</td>
+                      <td className="col-total">{item.Quantity * item.Price}</td>
                       <td className="col-edit">
                         <div
                           className="tracker-edit"
@@ -148,10 +213,76 @@ function ExpenseContent({ currentTracker }) {
               </table>
             </div>
           </div>
-          <div className="expense-dialog">
-            <div className="expense-dialog-content">
-              <div className="expense-dialog-head">
-              {dialogState == 'edit' ? 'Edit Row' : dialogState == 'add' ? 'Add Row' : ''}
+          <div className={`custom-dialog ${dialogState != '' ? "show" : "hide"}`}>
+            <div className="dialog-content">
+              <div className="dialog-head expense-dialog-head">
+                {dialogState == 'edit' ? 'Edit Row' : dialogState == 'add' ? 'Add Row' : ''}
+              </div>
+              <div className="dialog-input">
+                {dialogState == 'edit' ? (
+                  <>
+                    <input
+                      type="text"
+                      className="tracker-input"
+                      id="tracker-input"
+                      placeholder='Name'
+                      value={rowName}
+                      onChange={(e) => setRowName(e.target.value)}
+                    />
+
+                    <input
+                      type="number"
+                      className="tracker-input"
+                      id="tracker-input"
+                      placeholder='quantity'
+                      value={rowQuantity}
+                      onChange={(e) => setRowQuantity(e.target.value)}
+                    />
+
+                    <input
+                      type="number"
+                      className="tracker-input"
+                      id="tracker-input"
+                      placeholder='price'
+                      value={rowPrice}
+                      onChange={(e) => setRowPrice(e.target.value)}
+                    />
+
+                  </>
+                ) : dialogState == 'add' ? (
+                  <>
+                    <input
+                      type="text"
+                      className="tracker-input"
+                      id="tracker-input"
+                      placeholder='Name'
+                      value={rowName}
+                      onChange={(e) => setRowName(e.target.value)}
+                    />
+
+                    <input
+                      type="number"
+                      className="tracker-input"
+                      id="tracker-input"
+                      placeholder='quantity'
+                      value={rowQuantity}
+                      onChange={(e) => setRowQuantity(e.target.value)}
+                    />
+
+                    <input
+                      type="number"
+                      className="tracker-input"
+                      id="tracker-input"
+                      placeholder='price'
+                      value={rowPrice}
+                      onChange={(e) => setRowPrice(e.target.value)}
+                    />
+                  </>
+                ) : ''}
+              </div>
+              <div className="btn-container">
+                <button onClick={handleSave} className="save-btn button">Save</button>
+                <button onClick={handleCloseDialog} className="cancel-btn button">Cancel</button>
               </div>
             </div>
           </div>

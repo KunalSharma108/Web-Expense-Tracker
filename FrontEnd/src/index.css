@@ -1035,6 +1035,7 @@ body {
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.3s ease-in-out;
+    z-index: 999;
 }
 
 .custom-dialog.show {
@@ -1242,6 +1243,7 @@ body {
     justify-content: center;
     align-items: center;
     float: right;
+    position: relative;
 }
 
 .expense-main .loading+.expense-main {
@@ -1408,6 +1410,7 @@ body {
 .expense-table th,
 .expense-table td {
     padding: 12px 10px;
+    text-transform: capitalize;
 }
 
 .expense-table tbody {
@@ -1488,4 +1491,12 @@ body {
 .col-edit,
 .col-delete {
     width: 8%;
+}
+
+.dialog-content .expense-dialog-head {
+    margin-bottom:5px;
+}
+
+.dialog-input input {
+    margin: 10px 0;
 }
