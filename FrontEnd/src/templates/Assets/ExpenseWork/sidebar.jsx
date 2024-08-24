@@ -204,7 +204,6 @@ const Sidebar = ({ onSelect }) => {
         .then(snapshot => snapshot.val());
 
       updates[`Users/${userId}/Tracker/${selectedTracker}`] = null;
-      console.log(updates)
       await update(ref(database), updates);
 
       setTrackers(prevTrackers =>

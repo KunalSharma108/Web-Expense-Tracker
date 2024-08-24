@@ -13,6 +13,8 @@ function ExpenseContent({ currentTracker }) {
   const [rowName, setRowName] = useState('');
   const [rowQuantity, setRowQuantity] = useState('');
   const [rowPrice, setRowPrice] = useState('');
+  const [selectedIndex, setSelectedIndex] = useState('');
+  const [loadingEdit, setLoadingEdit] = useState(false)
 
   const getUserIdFromEmail = () => {
     const email = Cookies.get('Email');
@@ -72,16 +74,50 @@ function ExpenseContent({ currentTracker }) {
     window.alert('Delete button clicked');
   };
 
-  const handleEditOpenDialog = () => {
+  useEffect(() => {
+    if (selectedTrackerData && selectedTrackerData[selectedIndex]) {
+      setRowName(selectedTrackerData[selectedIndex].Name || '');
+      setRowPrice(selectedTrackerData[selectedIndex].Price || '');
+      setRowQuantity(selectedTrackerData[selectedIndex].Quantity || '');
+    }
+
+  }, [selectedTrackerData, selectedIndex]);
+
+
+  useEffect(() => {
+    if (dialogState == 'edit') {
+      const allValuesPresent = rowName !== '' && rowPrice !== '' && rowQuantity !== '';
+  
+      if (allValuesPresent) {
+        setLoadingEdit(false);
+      }
+    }
+  }, [rowName, rowPrice, rowQuantity]);
+
+
+
+  const handleEditOpenDialog = async (index) => {
     setDialogState('edit')
+    setSelectedIndex(index)
   };
+
+  useEffect(() => {
+    if (dialogState == 'edit') {
+      const allValues = rowName !== '' && rowPrice !== '' && rowQuantity !== '';
+
+      if (allValues) {
+        setLoadingEdit(false)
+      }
+    }
+  }, [rowName, rowPrice, rowQuantity])
 
   const handleAddOpenDialog = () => {
     setDialogState('add')
   }
 
   const editRow = () => {
-
+    // TODO : Edit the data in firebase database. Make sure to clean up the hooks after the edit is done. 
+    // TODO : Good luck for mental torture for next 3 hours straight *thumpbs up emoji*
   }
 
   const addRow = async () => {
@@ -119,13 +155,12 @@ function ExpenseContent({ currentTracker }) {
     }
   };
 
-
   const handleCloseDialog = () => {
     setDialogState('')
   }
 
   const handleSave = () => {
-    if (rowName.trim() == '' || rowQuantity.trim() == '' || rowPrice.trim() == '') {
+    if (rowName == '' || rowQuantity == '' || rowPrice == '') {
       window.alert("No Value can be empty.")
       return;
     }
@@ -186,7 +221,7 @@ function ExpenseContent({ currentTracker }) {
                           title="Edit"
                           onClick={(e) => {
                             e.stopPropagation();
-                            handleEditOpenDialog();
+                            handleEditOpenDialog(index);
                           }}
                         >
                           <i
@@ -220,33 +255,42 @@ function ExpenseContent({ currentTracker }) {
               </div>
               <div className="dialog-input">
                 {dialogState == 'edit' ? (
+
                   <>
-                    <input
-                      type="text"
-                      className="tracker-input"
-                      id="tracker-input"
-                      placeholder='Name'
-                      value={rowName}
-                      onChange={(e) => setRowName(e.target.value)}
-                    />
+                    {loadingEdit ? (
+                      <div className="loading-parent">
+                        <div className="loading"></div>
+                      </div>
+                    ) : (
+                      <>
+                        <input
+                          type="text"
+                          className="tracker-input"
+                          id="tracker-input"
+                          placeholder='Name'
+                          value={rowName}
+                          onChange={(e) => setRowName(e.target.value)}
+                        />
 
-                    <input
-                      type="number"
-                      className="tracker-input"
-                      id="tracker-input"
-                      placeholder='quantity'
-                      value={rowQuantity}
-                      onChange={(e) => setRowQuantity(e.target.value)}
-                    />
+                        <input
+                          type="number"
+                          className="tracker-input"
+                          id="tracker-input"
+                          placeholder='quantity'
+                          value={rowQuantity}
+                          onChange={(e) => setRowQuantity(e.target.value)}
+                        />
 
-                    <input
-                      type="number"
-                      className="tracker-input"
-                      id="tracker-input"
-                      placeholder='price'
-                      value={rowPrice}
-                      onChange={(e) => setRowPrice(e.target.value)}
-                    />
+                        <input
+                          type="number"
+                          className="tracker-input"
+                          id="tracker-input"
+                          placeholder='price'
+                          value={rowPrice}
+                          onChange={(e) => setRowPrice(e.target.value)}
+                        />
+                      </>
+                    )}
 
                   </>
                 ) : dialogState == 'add' ? (
