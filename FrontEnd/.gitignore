@@ -23,4 +23,4 @@ dist-ssr
 *.sln
 *.sw?
 
-FrontEnd\src\templates\Assets\Auth\firebase.js
+firebase.js
