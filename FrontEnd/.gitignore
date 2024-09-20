@@ -1,3 +1,4 @@
+FrontEnd/src/templates/Assets/Auth/firebase.js
 # Logs
 logs
 *.log
@@ -23,5 +24,3 @@ dist-ssr
 *.sln
 *.sw?
 
-
-FrontEnd/src/templates/Assets/Auth/firebase.js
