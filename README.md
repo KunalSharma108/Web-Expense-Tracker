@@ -22,6 +22,7 @@ import { getAuth } from "firebase/auth";
 import { getDatabase } from "firebase/database";
 
 // Your web app's Firebase configuration
+
 const firebaseConfig = {
   apiKey: "", // Put appropriate values
   authDomain: "",
