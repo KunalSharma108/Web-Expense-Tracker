@@ -70,9 +70,6 @@ function ExpenseContent({ currentTracker }) {
   }, [currentTracker, navigate]);
 
 
-  const deleteTracker = () => {
-    window.alert('Delete button clicked');
-  };
 
   useEffect(() => {
     if (selectedTrackerData && selectedTrackerData[selectedIndex]) {
@@ -87,7 +84,7 @@ function ExpenseContent({ currentTracker }) {
   useEffect(() => {
     if (dialogState == 'edit') {
       const allValuesPresent = rowName !== '' && rowPrice !== '' && rowQuantity !== '';
-  
+
       if (allValuesPresent) {
         setLoadingEdit(false);
       }
@@ -113,11 +110,6 @@ function ExpenseContent({ currentTracker }) {
 
   const handleAddOpenDialog = () => {
     setDialogState('add')
-  }
-
-  const editRow = () => {
-    // TODO : Edit the data in firebase database. Make sure to clean up the hooks after the edit is done. 
-    // TODO : Good luck for mental torture for next 3 hours straight *thumpbs up emoji*
   }
 
   const addRow = async () => {
@@ -146,18 +138,119 @@ function ExpenseContent({ currentTracker }) {
       await update(ref(database), updatedRow);
       setSelectedTrackerData(newValue);
 
+    } catch (error) {
+      window.alert('Failed to add row. Please try again.');
+
+    } finally {
       setRowName('')
       setRowQuantity('')
       setRowPrice('')
-
-    } catch (error) {
-      window.alert('Failed to add row. Please try again.');
     }
+  };
+
+  const editRow = async () => {
+    // TODO : Edit the data in firebase database. Make sure to clean up the hooks after the edit is done. 
+    // TODO : Good luck for mental torture for next 3 hours straight *thumpbs up emoji*
+
+    let Email = getUserIdFromEmail();
+    if (!Email) {
+      window.alert('There was a problem with your Email, need to sign out urgently.');
+      Cookies.remove('displayName');
+      Cookies.remove('Email');
+      window.location.reload();
+      navigate('/');
+      return;
+    }
+    selectedTrackerData.map(async (data, index) => {
+      if (index == selectedIndex) {
+        console.log(data)
+        data.Name = rowName;
+        data.Quantity = rowQuantity;
+        data.Price = rowPrice;
+        console.log(data)
+
+        const updatedRow = {};
+        updatedRow[`Users/${Email}/Tracker/${currentTracker}/expenseData`] = selectedTrackerData;
+
+        try {
+          await update(ref(database), updatedRow);
+
+        } catch (error) {
+          window.alert('Failed to edit row. Please try again.');
+
+        } finally {
+          setRowName('');
+          setRowQuantity('');
+          setRowPrice('');
+          setSelectedIndex('');
+        }
+      }
+    })
+    // ! I DID THIS SHIT IN LIKE 30 MINUTES HAHA, SUCKS TO BE YOU FOR THINKING IT WOULD TAKE ME 3 HOURS
+    // ! don't know why but these are the only comments I am not going to clear XD!
+  }
+
+  const deleteTracker = async (index) => {
+    let Email = getUserIdFromEmail();
+    if (!Email) {
+      window.alert('There was a problem with your Email, need to sign out urgently.');
+      Cookies.remove('displayName');
+      Cookies.remove('Email');
+      window.location.reload();
+      navigate('/');
+      return;
+    }
+
+    const confirmDelete = window.confirm(`Are you sure you want to delete this row?`);
+
+    if (confirmDelete) {
+      let newValue = selectedTrackerData.filter((value, arrindex) => arrindex !== index);
+      console.log(newValue)
+      const updatedRow = {};
+      updatedRow[`Users/${Email}/Tracker/${currentTracker}/expenseData`] = newValue;
+
+      try {
+        await update(ref(database), updatedRow);
+        setSelectedTrackerData(newValue);
+
+      } catch (error) {
+        window.alert('Failed to add row. Please try again.');
+
+      } finally {
+        setRowName('')
+        setRowQuantity('')
+        setRowPrice('')
+        setSelectedIndex('');
+      }
+    }
+
+
   };
 
   const handleCloseDialog = () => {
     setDialogState('')
   }
+
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+
+      if (rowName == '' || rowQuantity == '' || rowPrice == '') {
+        window.alert("No Value can be empty.")
+        return;
+      }
+
+      if (dialogState == 'add') {
+        addRow();
+      } else if (dialogState == 'edit') {
+        editRow();
+      } else {
+        window.alert('An error occured')
+        window.location.reload();
+      }
+      setDialogState('')
+    }
+  };
 
   const handleSave = () => {
     if (rowName == '' || rowQuantity == '' || rowPrice == '') {
@@ -236,7 +329,7 @@ function ExpenseContent({ currentTracker }) {
                           title="Delete"
                           onClick={(e) => {
                             e.stopPropagation();
-                            deleteTracker();
+                            deleteTracker(index);
                           }}
                         >
                           <i className="fa-solid fa-trash" title="Delete"></i>
@@ -270,6 +363,7 @@ function ExpenseContent({ currentTracker }) {
                           placeholder='Name'
                           value={rowName}
                           onChange={(e) => setRowName(e.target.value)}
+                          onKeyDown={handleKeyDown}
                         />
 
                         <input
@@ -279,6 +373,7 @@ function ExpenseContent({ currentTracker }) {
                           placeholder='quantity'
                           value={rowQuantity}
                           onChange={(e) => setRowQuantity(e.target.value)}
+                          onKeyDown={handleKeyDown}
                         />
 
                         <input
@@ -288,6 +383,7 @@ function ExpenseContent({ currentTracker }) {
                           placeholder='price'
                           value={rowPrice}
                           onChange={(e) => setRowPrice(e.target.value)}
+                          onKeyDown={handleKeyDown}
                         />
                       </>
                     )}
@@ -302,6 +398,7 @@ function ExpenseContent({ currentTracker }) {
                       placeholder='Name'
                       value={rowName}
                       onChange={(e) => setRowName(e.target.value)}
+                      onKeyDown={handleKeyDown}
                     />
 
                     <input
@@ -311,6 +408,7 @@ function ExpenseContent({ currentTracker }) {
                       placeholder='quantity'
                       value={rowQuantity}
                       onChange={(e) => setRowQuantity(e.target.value)}
+                      onKeyDown={handleKeyDown}
                     />
 
                     <input
@@ -320,6 +418,7 @@ function ExpenseContent({ currentTracker }) {
                       placeholder='price'
                       value={rowPrice}
                       onChange={(e) => setRowPrice(e.target.value)}
+                      onKeyDown={handleKeyDown}
                     />
                   </>
                 ) : ''}

@@ -49,31 +49,32 @@ function Footer(props) {
             <Link to={'/'} onClick={scrollToTop} className='hyperlink footer-font'>Home</Link>
             <Link to={'/ContactUs'} onClick={scrollToTop} className='hyperlink footer-font'>Contact Us</Link>
             <Link to={'/expense-work'} onClick={scrollToTop} className='hyperlink footer-font'>Manage Expenses</Link>
-            <Link to={'/Profile'} onClick={scrollToTop} className='hyperlink footer-font'>Profile</Link>
-            <Link to={'/User-Guide'} onClick={scrollToTop} className='hyperlink footer-font'>User Guide</Link>
           </div>
           <div className="socials">
-            <a href="https://www.instagram.com/kunal_sharma108" className="social footer-font" target='_blank'>
+
+            {/* your respective social links goes here */}
+
+            <a href="" className="social footer-font" target='_blank'>
               <div className="logo"><i className="fa-brands fa-instagram insta fa-lg"></i></div>
               <div className="social-name">Instagram</div>
             </a>
-            <a href="https://www.linkedin.com/in/kunal-sharma-209435283/" className="social footer-font" target='_blank'>
+            <a href="" className="social footer-font" target='_blank'>
               <div className="logo"><i className="fa-brands fa-linkedin linkedin fa-lg"></i></div>
               <div className="social-name">Linked In</div>
             </a>
-            <a href="https://github.com/KunalSharma108" className="social footer-font" target='_blank'>
+            <a href="" className="social footer-font" target='_blank'>
               <div className="logo"><i className="fa-brands fa-github github fa-lg"></i></div>
               <div className="social-name">Github</div>
             </a>
-            <a href="https://www.fiverr.com/nalvo108" className="social footer-font" target='_blank'>
+            <a href="" className="social footer-font" target='_blank'>
               <div className="logo fiverr-logo roboto-bold">fi</div>
               <div className="social-name">Fiverr</div>
             </a>
-            <a href="mailto:kunalsharma0422@gmail.com" className="social footer-font" target='_blank'>
+            <a href="" className="social footer-font" target='_blank'>
               <div className="logo"><i className="fa-regular fa-envelope email fa-lg"></i></div>
               <div className="social-name">Email</div>
             </a>
-            <a href="https://codepen.io/KunalSharma108" className="social footer-font" target='_blank'>
+            <a href="" className="social footer-font" target='_blank'>
               <div className="logo"><i className="fa-brands fa-codepen codepen fa-lg"></i></div>
               <div className="social-name">CodePen</div>
             </a>

@@ -44,16 +44,10 @@ function Navbar(props) {
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav">
                         <li className="nav-item">
-                            <Link className={`nav-link roboto-black ${props.learnActive}`} aria-current="page" to={'/User-Guide'}>User Guide</Link>
-                        </li>
-                        <li className="nav-item">
                             <Link className={`nav-link roboto-black ${props.meActive} ${props.disabled.displayName == false || props.disabled.Email == false ? "disabled" : ''} `} to={'/expense-work'}>Manage Expenses</Link>
                         </li>
                         <li className="nav-item">
                             <Link className={`nav-link roboto-black ${props.cuActive} ${props.disabled.displayName == false || props.disabled.Email == false ? "disabled" : ''} `} to={'/ContactUs'}>Contact Us</Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link className={`nav-link roboto-black ${props.pfActive} ${props.disabled.displayName == false || props.disabled.Email == false ? "disabled" : ''} `} to={'/Profile'}>My Profile</Link>
                         </li>
                     </ul>
                 </div>
