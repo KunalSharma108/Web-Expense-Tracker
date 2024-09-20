@@ -12,7 +12,7 @@ This project is a web-based **Expense Tracker** application built with **React**
 
 ## Firebase Setup
 
-Please note that the `firebase.js` file is **not included** in the repository for security reasons. You will need to create your own `firebase.js` file in the appropriate directory and add the following code:
+Please note that the `firebase.js` file is **not included** in the repository for security reasons. You will need to create your own `firebase.js` file in the `FrontEnd\src\templates\Assets\Auth` directory and add the following code:
 
 ```javascript
 // Import the functions you need from the SDKs you need
