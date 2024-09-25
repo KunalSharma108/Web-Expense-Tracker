@@ -124,10 +124,9 @@ function SignUp() {
                   const randomItem = dummyItems[randomIndex];
                   const randomAmount = Math.floor(Math.random() * 100) + 1;
 
-                  const expenseData = {
-                    [randomItem]: randomAmount
-                  };
-                  await set(userRef, { Expenses: { expenseData } });
+                  let item = {Name : randomItem, Price : randomAmount, Quantity: randomAmount}
+
+                  await set(userRef, { Expenses: { expenseData: [ item ] } });
                 } catch (error) {
                   console.error('Error adding random expense:', error);
                 }

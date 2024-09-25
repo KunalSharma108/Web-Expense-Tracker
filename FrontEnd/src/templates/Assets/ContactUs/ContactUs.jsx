@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
 import { ref, set } from 'firebase/database';
 import { database } from '../Auth/firebase';
+import { useNavigate } from 'react-router-dom';
 
 function ContactUs() {
+  const navigate = useNavigate();
   const name = Cookies.get('displayName');
   const email = Cookies.get('Email');
 
@@ -14,6 +16,15 @@ function ContactUs() {
     const email = Cookies.get('Email');
     return email ? email.split('@')[0] : null;
   };
+
+  useEffect(() => {
+    if (!name && !email) {
+      alert('There was a problem with your email.')
+      navigate('/')
+    }
+
+  },[name, email])
+
 
   const userId = getUserIdFromEmail();
 
@@ -32,7 +43,7 @@ function ContactUs() {
 
     await set(userRef, data);
     alert('Thanks for contacting us!')
-    window.location.reload()
+    navigate('/')
   };
 
   return (

@@ -24,9 +24,8 @@ function App(props) {
   const fetchData = async () => {
     try {
       const db = getDatabase();
-      const snapshot = await get(ref(db, "Users"))
 
-      if (snapshot.exists()) {
+      if (db) {
         setBackendOnline("loadingDone");
         setTimeout(() => {
           setBackendOnline(true);

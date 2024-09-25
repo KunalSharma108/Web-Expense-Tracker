@@ -1,4 +1,7 @@
 import React from 'react'
+import Journal from '../images/journal.jpg'
+import BudgetManage from '../images/budget-manage.jpg'
+import Finance from '../images/finance.jpg'
 
 function WhyWET() {
   return (
@@ -6,7 +9,7 @@ function WhyWET() {
       <div className="why-content">
         <div className="why-box">
           <div className="why-pic">
-            <img src="src\templates\Assets\images\journal.jpg" alt="" />
+            <img src={`${Journal}`} alt="" />
           </div>
           <div className="why-p">
             <div className="why-head">Efficient Expense Tracking</div>
@@ -23,12 +26,12 @@ function WhyWET() {
             </div>
           </div>
           <div className="why-pic">
-            <img src="src\templates\Assets\images\budget-manage.jpg" alt="" />
+            <img src={`${BudgetManage}`} alt="" />
           </div>
         </div>
         <div className="why-box">
           <div className="why-pic">
-            <img src="src\templates\Assets\images\finance.jpg" alt="" />
+            <img src={`${Finance}`} alt="" />
           </div>
           <div className="why-p">
             <div className="why-head">Advantages of Digital Expense Tracking</div>

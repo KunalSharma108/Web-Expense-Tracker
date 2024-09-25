@@ -269,6 +269,8 @@ function ExpenseContent({ currentTracker }) {
     setDialogState('')
   }
 
+  console.log(selectedTrackerData)
+
   return (
     <div className="expense-main">
       {loading && (
